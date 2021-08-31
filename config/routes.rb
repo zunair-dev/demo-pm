@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/new'
+  post 'employees',  to: 'users#add_user'
   resources :projects do
     resources :tasks
   end
