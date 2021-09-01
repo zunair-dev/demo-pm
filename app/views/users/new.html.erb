@@ -13,10 +13,14 @@
     <%= user.label :password_confirmation %><br />
     <%= user.password_field :password_confirmation %>
   </div>
-  <div class="field">
-    <%= user.label :Role %><br />
-    <%= user.select :admin, User::ROLE_OPTIONS %>
-  </div>
+
+  <% if current_user.id == 1 %>
+    <div class="field">
+      <%= user.label :Role %><br />
+      <%= user.select :admin, User::ROLE_OPTIONS %>
+    </div>
+  <% end %>
+
   <div class="add">
     <%= user.submit %>
   </div>
