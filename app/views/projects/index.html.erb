@@ -1,33 +1,44 @@
 <%= link_to 'log out', destroy_user_session_path, method: :delete %>
 
-<h1>Welcome to the Projects Section</h1>
+<div class="card">
+  <div class='card-header'>
+    <h2 class='card-title d-flex justify-content-between'>
+      <span>Welcome to the Projects Section</span>
+      <%= link_to 'New Project', new_project_path, class:'btn btn-primary' %>
+    </h2>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>User</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= project.user_id %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.description %></td>
+            <td><%= project.user_id %></td>
+            <td><%= link_to 'Show', project %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
 
 <br>
-
-<%= link_to 'New Project', new_project_path %>
 
 <%= link_to 'New User', users_new_path %>
