@@ -1,0 +1,23 @@
+<h2>Adding a new user</h2>
+
+<%= form_for User.new , :url => {:action => "add_user"} do |user| %>
+  <div class="field">
+    <%= user.label :email %><br />
+    <%= user.email_field :email %>
+  </div>
+  <div class="field">
+    <%= user.label :password %><br />
+    <%= user.password_field :password %>
+  </div>
+  <div class="field">
+    <%= user.label :password_confirmation %><br />
+    <%= user.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= user.label :Role %><br />
+    <%= user.select :admin, User::ROLE_OPTIONS %>
+  </div>
+  <div class="add">
+    <%= user.submit %>
+  </div>
+<%end%>
