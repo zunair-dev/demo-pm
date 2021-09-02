@@ -1,27 +1,29 @@
+<div class="col-md-4">
 <h2>Adding a new user</h2>
 
 <%= form_for User.new , :url => {:action => "add_user"} do |user| %>
-  <div class="field">
+  <div class="form-group">
     <%= user.label :email %><br />
-    <%= user.email_field :email %>
+    <%= user.email_field :email, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= user.label :password %><br />
-    <%= user.password_field :password %>
+    <%= user.password_field :password, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= user.label :password_confirmation %><br />
-    <%= user.password_field :password_confirmation %>
+    <%= user.password_field :password_confirmation, class: 'form-control' %>
   </div>
 
   <% if current_user.id == 1 %>
-    <div class="field">
+    <div class="form-group">
       <%= user.label :Role %><br />
-      <%= user.select :admin, User::ROLE_OPTIONS %>
+      <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
     </div>
   <% end %>
 
   <div class="add">
-    <%= user.submit %>
+    <%= user.submit class:'btn btn-primary'%>
   </div>
 <%end%>
+</div>
