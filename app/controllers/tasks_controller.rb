@@ -35,7 +35,11 @@ class TasksController < ApplicationController
   # PUT projects/1/tasks/1
   def update
     if @task.update(task_params)
-      redirect_to(@task.project)
+      if current_user.admin == true
+        redirect_to(@task.project)
+      else
+        redirect_to(employees_index_path(current_user.id))
+      end
     else
       render action: 'edit'
     end

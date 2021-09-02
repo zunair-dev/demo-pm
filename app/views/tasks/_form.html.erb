@@ -27,14 +27,14 @@
   <%else%>
     <div class="form-group">
       <%= f.label :name %><br />
-      <%= f.text_field :name, class: "form-control mb-2", :readonly => true %>
+      <%= f.text_field :name, class: "form-control", :readonly => true %>
     </div>
     <div class="form-group">
       <%= f.label :hours_worked %><br />
-      <%= f.text_field :hours_worked, class: "form-control mb-2" %>
+      <%= f.text_field :hours_worked, class: "form-control" %>
     </div>
   <%end%>
   <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
+    <%= f.submit class: 'btn btn-primary mt-2' %>
   </div>
 <% end %>
