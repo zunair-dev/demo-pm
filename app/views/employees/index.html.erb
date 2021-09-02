@@ -1,30 +1,26 @@
 <%= link_to 'log out', destroy_user_session_path, method: :delete %>
 
-<h1>Welcome to the Employees Section</h1>
+<div class="card">
+  <div class='card-body'>
+    <div class='card-header mb-3'>
+      <h2 class='card-title d-flex justify-content-between'>
+        <span>Welcome to the Employees Section</span>
+      </h2>
+    </div>
 
-<hr>
+    <h3>Tasks Assigned</h3>
 
-<h3>Tasks Assigned</h3>
+    <% @tasks.each do |t| %>
+      <%= link_to project_task_url(t.project_id, t), class: 'text-decoration-none' do %>
+        <div class="card project-card mb-3">
+          <div class="card-body">
 
-<% @tasks.each do |t| %>
-  <p>
-    <b>Name:</b>
-    <%= t.name %>
-  </p>
-
-  <p>
-    <b>Description:</b>
-    <%= t.description %>
-  </p>
-
-  <p>
-    <b>Status:</b>
-    <%= t.status %>
-  </p>
-
-  <p>
-    <b>Project:</b>
-    <%= t.project %>
-  </p>
-
-<%end%>
+              <span class="badge badge-primary mb-3"><%= t.status %></span>
+            <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+            <p><%= t.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
