@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require("packs/custom")
 require("packs/posts.js")
+//= require toastr
 
 Rails.start()
 Turbolinks.start()
