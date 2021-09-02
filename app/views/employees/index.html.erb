@@ -11,16 +11,14 @@
     <h3>Tasks Assigned</h3>
 
     <% @tasks.each do |t| %>
-      <%= link_to project_task_url(t.project_id, t), class: 'text-decoration-none' do %>
-        <div class="card project-card mb-3">
-          <div class="card-body">
-
-              <span class="badge badge-primary mb-3"><%= t.status %></span>
-            <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
-            <p><%= t.description %></p>
-          </div>
+      <div class="card project-card mb-3">
+        <div class="card-body">
+          <span class="badge badge-primary mb-3"><%= t.status %></span>
+          <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+          <p><%= t.description %></p>
+          <%= link_to 'add logged in hours', employees_index_url, class: 'btn btn-secondary' %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>
