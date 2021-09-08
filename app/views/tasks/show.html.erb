@@ -4,7 +4,8 @@
     <div class="card mb-3">
       <div class="card-body">
         <div class='d-flex justify-content-between'>
-          <span class="badge badge-primary mb-3"><%= @task.status %></span>
+          <span class="badge badge-primary mb-3"><%= @task.status %></span> | 
+          <span class="badge badge-primary mb-3"><%= @task.hours %></span>
           <div>
             <%= link_to "assign", assign_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
             <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
