@@ -6,6 +6,8 @@ ruby '3.0.2'
 gem 'toastr-rails'
 gem 'devise'
 gem 'nested_scaffold'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
