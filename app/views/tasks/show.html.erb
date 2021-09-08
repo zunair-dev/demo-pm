@@ -1,22 +1,22 @@
 <div class="card">
   <div class="card-body">
   
-      <div class="card mb-3">
-        <div class="card-body">
-          <div class='d-flex justify-content-between'>
-            <span class="badge badge-primary mb-3"><%= @task.status %></span>
-            <div>
-              <%= link_to 'assign', assign_project_task_path(@task.project, @task), class: 'btn btn-light btn-sm' %>
-              <%= link_to 'Edit', edit_project_task_path(@task.project, @task), class: 'btn btn-light btn-sm' %>
-              <%= link_to 'Destroy', [@task.project, @task], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary btn-sm' %>
-            </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class='d-flex justify-content-between'>
+          <span class="badge badge-primary mb-3"><%= @task.status %></span>
+          <div>
+            <%= link_to "assign", assign_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
+            <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
+            <%= link_to "Destroy", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
           </div>
-          <h5 class="card-title mb-2">
-            <span><%= @task.name %></span>
-            <p><%= @task.description %></p>
-          </h5>
         </div>
+        <h5 class="card-title mb-2">
+          <span><%= @task.name %></span>
+          <p><%= @task.description %></p>
+        </h5>
       </div>
+    </div>
 
   </div>
 </div>
