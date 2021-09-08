@@ -6,6 +6,8 @@
       </h2>
     </div>
 
+    <%= link_to 'Download Status Report', employees_index_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %> 
+       
     <h3>Tasks Assigned</h3>
 
     <% @tasks.each do |t| %>
