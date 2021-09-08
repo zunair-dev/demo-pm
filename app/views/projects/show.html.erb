@@ -1,11 +1,11 @@
-<%= link_to 'Back', projects_path, class: 'btn btn-secondary mb-3' %>
+<%= link_to "Back", projects_path, class: "btn btn-secondary mb-3" %>
 <div class="card">
   <div class="card-body">
     <h2 class='card-title d-flex justify-content-between mb-4'>
       <span><%= @project.name %></span>
       <div>
-        <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-light' %>
-        <%= link_to 'Destroy', @project, method: :delete, class: 'btn btn-dark', data: { confirm: 'Are you sure?' } %>
+        <%= link_to "Edit", edit_project_path(@project), class: "btn btn-light" %>
+        <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
     </h2>
 
@@ -24,12 +24,12 @@
           </div>
         <% end %>
 
-        <%= f.hidden_field :status, value: 'pending' %>
+        <%= f.hidden_field :status, value: "pending" %>
 
         <div class="input-group">
-          <%= f.text_field :name, class: 'form-control', placeholder: 'Enter task name...' %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Enter task name..." %>
           <div class="input-group-append">
-            <%= f.submit class: 'btn btn-primary' %>
+            <%= f.submit class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
@@ -43,14 +43,16 @@
             <div class='d-flex justify-content-between'>
               <span class="badge badge-primary mb-3"><%= task.status %></span>
               <div>
-                <%= link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-light btn-sm' %>
-                <%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary btn-sm' %>
+                <%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-light btn-sm" %>
+                <%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
               </div>
             </div>
-            <h5 class="card-title mb-2">
-              <span><%= task.name %></span>
-              <p><%= task.description %></p>
-            </h5>
+            <%= link_to project_task_path(@project, task), class: "text-decoration-none" do %>
+              <h5 class="card-title mb-2">
+                <span><%= task.name %></span>
+                <p><%= task.description %></p>
+              </h5>
+            <% end %>
           </div>
         </div>
       <% end %>
