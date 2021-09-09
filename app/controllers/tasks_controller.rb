@@ -32,6 +32,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def assign
+    @project = Project.find(params[:project_id])
+    @task = Task.find(params[:id])
+    @user = User.where(admin: false).ids
+
+  end
+
   # PUT projects/1/tasks/1
   def update
     if @task.update(task_params)
@@ -64,6 +71,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :description, :status, :project_id, :hours_worked, :hours)
+      params.require(:task).permit(:name, :description, :status, :project_id, :hours_worked, :hours, :user_id)
     end
 end

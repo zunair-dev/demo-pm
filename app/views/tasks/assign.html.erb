@@ -1,7 +1,33 @@
 <div class="card">
   <div class="card-body">
   
-      in progress
+    <h2 class='card-title d-flex justify-content-between mb-4'>
+      <span>Assigning Task: <%= @task.name %></span>
+    </h2>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class='d-flex '>
+          <span class="badge badge-primary mb-3">Status: <%= @task.status %></span> | 
+          <span class="badge badge-primary mb-3">Hours: <%= @task.hours %></span>
+        </div>
+        <div>
+          <h5 class="card-title mb-2">
+            <span><b>Name:</b> <%= @task.name %></span>
+            <p><b>Description:</b> <%= @task.description %></p>
+            <%= form_with(model: [@task.project, @task])  do |t| %>
+              <div class="form-group">
+                <%= t.label :SelectUser %><br />
+                <%= t.select :user_id, @user, {}, class: 'form-control mb-2' %>
+              </div>
+              <div class="actions">
+                <%= t.submit class: 'btn btn-primary mt-2' %>
+              </div>
+            <%end%>
+          </h5>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>

@@ -3,6 +3,7 @@
     <h2 class='card-title d-flex justify-content-between mb-4'>
       <span><%= @project.name %></span>
       <div>
+        <%= link_to "Assign Tasks", project_tasks_path(@project), class: "btn btn-light" %>
         <%= link_to "Edit", edit_project_path(@project), class: "btn btn-light" %>
         <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
@@ -44,7 +45,8 @@
               <span class="badge badge-primary mb-3">Total hours: <%= task.hours %></span> | 
               <span class="badge badge-primary mb-3">Hours worked: <%= task.hours %></span>
               <div>
-                <%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-light btn-sm" %>
+                <%= link_to "Assign", assign_project_task_path(task.project, task), class: "btn btn-light btn-secondary" %>
+                <%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-light btn-secondary" %>
                 <%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
               </div>
             </div>
