@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @user = User.where(admin: false)
+  end
+  
   def new
     @user = User.new
   end
