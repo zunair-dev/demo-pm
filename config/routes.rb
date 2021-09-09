@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'admin/assign'
   get 'employees/index'
+  get 'employees/task'
   get 'users/new'
   post 'employees',  to: 'users#add_user'
   resources :projects do

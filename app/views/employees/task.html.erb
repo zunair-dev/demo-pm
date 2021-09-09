@@ -1,0 +1,25 @@
+PDF Generation Date: <%= Time.zone.now %>
+<h3>Tasks Assigned</h3>
+
+<% @tasks.each do |t| %>
+  <p>
+    <strong>ID: </strong>
+    <%= t.id%>
+  </p>
+
+  <div>
+    <span>Status: <%= t.status %> </span> |
+    <span><%= t.hours %> hour's required </span> |
+    <span> <%= t.hours_worked %> hour's worked </span> 
+  </div>
+
+  <p>
+    <strong>Name: </strong>
+    <%= t.name%>
+  </p>
+
+  <p>
+    <strong>Description: </strong>
+    <%= t.description%>
+  </p>
+<% end %>

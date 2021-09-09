@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "status report", template: "employees/index.html.erb"   # Excluding ".pdf" extension.
+        render pdf: "status report", template: "employees/task.html.erb"   # Excluding ".pdf" extension.
       end
     end
   end
