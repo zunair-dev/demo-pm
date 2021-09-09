@@ -38,7 +38,7 @@ class TasksController < ApplicationController
       if current_user.admin == true
         redirect_to(@task.project)
       else
-        redirect_to(employees_index_path(current_user.id))
+        redirect_to(employees_index_path)
       end
     else
       render action: 'edit'
