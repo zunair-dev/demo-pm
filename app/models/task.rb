@@ -2,13 +2,15 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :user, optional: true
 
-  validates :status, inclusion: { in: ['pending', 'in-progress', 'complete'] }
-
-  STATUS_OPTIONS = [
-    ['Pending', 'pending'],
-    ['In progress', 'in-progress'],
-    ['Complete', 'complete']
-  ]
+  def status
+    if (hours == hours_worked)
+      'complete'
+    elsif ((hours != hours_worked) && hours_worked != 0)
+      'in-progress'
+    else
+      'pending'
+    end
+  end
 
   def complete?
     status == 'complete'
