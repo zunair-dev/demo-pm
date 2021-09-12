@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-
+  include Pundit
+  
   def after_sign_in_path_for(resource)
     if current_user.admin == false
       employees_index_path
