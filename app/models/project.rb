@@ -9,4 +9,14 @@ class Project < ApplicationRecord
     ['In progress', 'in-progress'],
     ['Complete', 'complete']
   ]
+
+  def status
+    if tasks.all? { |task| task.complete? }
+      'complete'
+    elsif tasks.any? { |task| task.in_progress? || task.complete? }
+      'in-progress'
+    else
+      'pending'
+    end
+  end
 end

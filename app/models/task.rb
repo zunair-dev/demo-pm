@@ -9,4 +9,16 @@ class Task < ApplicationRecord
     ['In progress', 'in-progress'],
     ['Complete', 'complete']
   ]
+
+  def complete?
+    status == 'complete'
+  end
+
+  def in_progress?
+    status == 'in-progress'
+  end
+
+  def pending?
+    status == 'pending'
+  end
 end
