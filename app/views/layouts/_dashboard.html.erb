@@ -14,7 +14,7 @@
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Employee's Dashboard</h1>
       <div class="d-flex justify-content-between">
-        <%= link_to 'Download Status Report', employees_index_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
+        <%= link_to 'Download Status Report', employees_pdf_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
       </div>
     </div>
   <% end %>

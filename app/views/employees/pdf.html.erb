@@ -1,0 +1,24 @@
+<h2><center>Status Report</center></h2>
+<h3>Tasks Assigned: <%= @tasks.count %></h3>
+<hr>
+<table border=1 style="width:100%;">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Hours required</th>
+    <th>Hours worked</th>
+    <th>Status</th>
+  </tr>
+  <% @tasks.each do |t| %>
+    <tr>
+      <td><%= t.name %></td>
+      <td><%= t.description %></td>
+      <td><%= t.hours %></td>
+      <td><%= t.hours_worked %></td>
+      <td><%= t.status %></td>
+    </tr>
+  <% end %>
+</table>
+
+  <br>
+PDF Generation Date: <%= Time.zone.now %>
