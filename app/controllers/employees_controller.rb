@@ -5,6 +5,8 @@ class EmployeesController < ApplicationController
       redirect_to root_path
     else
       @tasks = current_user.tasks.where.not(status: 'complete')
+      puts "-----------------------------------------------------------------------"
+      puts @tasks
       respond_to do |format|
         format.html
         format.pdf do
