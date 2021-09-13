@@ -1,26 +1,16 @@
-<div class="card">
-  <div class='card-body'>
-    <div class='card-header mb-3'>
-      <h2 class='card-title d-flex justify-content-between'>
-        <span>Welcome to the Projects Section</span>
-        <%= link_to 'New Project', new_project_path, class:'btn btn-primary' %>
-        <%= link_to 'View Users', users_index_path, class:'btn btn-secondary' %>
-        <%= link_to 'New User', users_new_path, class:'btn btn-secondary' %>
-      </h2>
-    </div>
-
-    <% @projects.each do |project| %>
-      <%= link_to project, class: 'text-decoration-none' do %>
-        <div class="card project-card mb-3">
-          <div class="card-body">
-            <span class="badge badge-primary mb-3">Time: <%= project.hours %> hours</span> |
-            <span class="badge badge-primary mb-3">Cost: <%= project.cost %> k</span> |
-            <span class="badge badge-primary mb-3">Status: <%= project.status %> </span>
-            <h5 class='card-title text-dark'><b><%= project.name %></b></h5>
-            <p><%= project.description %></p>
-          </div>
+<div class='card-body'>
+  <h3>Projects Created By You</h3>
+  <% @projects.each do |project| %>
+    <%= link_to project, class: "text-decoration-none" do %>
+      <div class="card project-card mb-3">
+        <div class="card-body">
+          <span class="badge badge-primary mb-3">Time: <%= project.hours %> hours</span> |
+          <span class="badge badge-primary mb-3">Cost: <%= project.cost %> k</span> |
+          <span class="badge badge-primary mb-3">Status: <%= project.status %> </span>
+          <h5 class='card-title text-dark'><b><%= project.name %></b></h5>
+          <p><%= project.description %></p>
         </div>
-      <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

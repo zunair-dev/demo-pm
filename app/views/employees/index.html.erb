@@ -1,26 +1,16 @@
-<div class="card">
-  <div class='card-body'>
-    <div class='card-header mb-3'>
-      <h2 class='card-title d-flex justify-content-between'>
-        <span>Welcome to the Employees Section</span>
-      </h2>
-    </div>
+<div class='card-body'>
+  <h3>Tasks Assigned</h3>
 
-    <%= link_to 'Download Status Report', employees_index_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %> 
-       
-    <h3>Tasks Assigned</h3>
-
-    <% @tasks.each do |t| %>
-      <div class="card project-card mb-3">
-        <div class="card-body">
-          <span class="badge badge-primary mb-3"><%= t.status %> </span> |
-          <span class="badge badge-primary mb-3"><%= t.hours %> hour's required </span> |
-          <span class="badge badge-primary mb-3"> <%= t.hours_worked %> hour's worked </span> 
-          <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
-          <p><%= t.description %></p>
-          <%= link_to 'add logged in hours', edit_project_task_path(t.project, t), class: 'btn btn-secondary' %>
-        </div>
+  <% @tasks.each do |t| %>
+    <div class="card project-card mb-3">
+      <div class="card-body">
+        <span class="badge badge-primary mb-3"><%= t.status %> </span> |
+        <span class="badge badge-primary mb-3"><%= t.hours %> hour's required </span> |
+        <span class="badge badge-primary mb-3"> <%= t.hours_worked %> hour's worked </span> 
+        <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+        <p><%= t.description %></p>
+        <%= link_to 'add logged in hours', edit_project_task_path(t.project, t), class: 'btn btn-secondary' %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
