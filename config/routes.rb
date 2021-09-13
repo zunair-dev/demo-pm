@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'admin/assign'
   get 'employees/index'
   get 'employees/pdf'
+  get 'employees/complete'
   get 'users/new'
   get 'users/index'
   post 'employees',  to: 'users#add_user'

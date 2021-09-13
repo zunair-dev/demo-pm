@@ -26,6 +26,9 @@
           <%= link_to "Dashboard", employees_index_path, class: "nav-link active" %>
         </li>
         <li class="nav-item">
+          <%= link_to "Completed Tasks", employees_complete_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'Download Status Report', employees_index_path(current_user, format: :pdf), class: 'nav-link' %>
         </li>
       </ul>

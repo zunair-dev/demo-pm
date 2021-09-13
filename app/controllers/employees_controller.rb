@@ -4,7 +4,15 @@ class EmployeesController < ApplicationController
     if current_user.admin?
       redirect_to root_path
     else
-      @tasks = current_user.tasks.all
+      @tasks = current_user.tasks.where.not(status: 'complete')
+    end
+  end
+
+  def complete
+    if current_user.admin?
+      redirect_to root_path
+    else
+      @tasks = current_user.tasks.where(status: 'complete')
     end
   end
 

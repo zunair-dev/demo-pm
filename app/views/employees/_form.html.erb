@@ -1,0 +1,19 @@
+<% if @tasks.count == 0 %>
+  <div class="card">
+    <center><i>No tasks assigned to you yet!</i></center>
+  </div>
+<% else %>
+<% @tasks.each do |t| %>
+  <div class="card project-card mb-3">
+    <div class="card-body">
+      <span class="badge badge-primary mb-3"><%= t.status %> </span> |
+      <span class="badge badge-primary mb-3"><%= t.hours %> hour's required </span> |
+      <span class="badge badge-primary mb-3"> <%= t.hours_worked %> hour's worked </span> 
+      <%= link_to project_task_path(t.project, t), class: "text-decoration-none" do %>
+        <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+        <p><%= t.description %></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% end %>
