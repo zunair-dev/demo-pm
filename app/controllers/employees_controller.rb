@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          render pdf: "status report", template: "employees/pdf.html.erb"   # Excluding ".pdf" extension.
+          render pdf: "status report", template: "employees/pdf.html.erb"
         end
       end
     end
@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          render pdf: "status report", template: "employees/pdf.html.erb"   # Excluding ".pdf" extension.
+          render pdf: "status report", template: "employees/pdf.html.erb"
         end
       end
     end
@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "status report", template: "employees/pdf.html.erb"   # Excluding ".pdf" extension.
+        render pdf: "status report", template: "employees/pdf.html.erb"
       end
     end
   end
