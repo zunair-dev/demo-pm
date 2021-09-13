@@ -1,13 +1,7 @@
-<% if current_user.admin == true %>
-  <%= link_to 'Back', @project, class: 'btn btn-secondary mb-3' %>
-<%else%>
-  <%= link_to 'Back', employees_index_path(@employee), class: 'btn btn-secondary mb-3' %>
-<%end%>
-
 <div class="card">
   <div class="card-body">
     <h2 class='card-title mb-4'>
-      <span>Editing task</span>
+      <span>Editing Task</span>
     </h2>
 
     <%= render 'form' %>

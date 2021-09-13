@@ -33,6 +33,10 @@
       <%= f.label :hours_worked %><br />
       <%= f.text_field :hours_worked, class: "form-control" %>
     </div>
+    <div class="field">
+      <%= f.check_box :status, {}, 'complete' %>
+      <%= f.label :mark_as_complete %> 
+    </div>
   <%end%>
   <div class="actions">
     <%= f.submit class: 'btn btn-primary mt-2' %>

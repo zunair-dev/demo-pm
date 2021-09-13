@@ -1,20 +1,25 @@
 <div class="card">
   <div class="card-body">
-  
+    <h3>View Task</h3>
     <div class="card mb-3">
       <div class="card-body">
         <div class='d-flex justify-content-between'>
-          <span class="badge badge-primary mb-3"><%= @task.status %></span> | 
-          <span class="badge badge-primary mb-3"><%= @task.hours %></span>
-          <div>
-            <%= link_to "assign", assign_project_task_path(project_id: @task.project.id, task_id: @task.id), class: "btn btn-light btn-sm" %>
-            <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
-            <%= link_to "Destroy", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
-          </div>
+          <span class="badge badge-primary mb-3">Status: <%= @task.status %></span> | 
+          <span class="badge badge-primary mb-3">Hours required: <%= @task.hours %></span> | 
+          <span class="badge badge-primary mb-3">Hours worked: <%= @task.hours_worked %></span>
+          <% if current_user.admin == true %>
+            <div>
+              <%= link_to "assign", assign_project_task_path(project_id: @task.project.id, task_id: @task.id), class: "btn btn-light btn-sm" %>
+              <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
+              <%= link_to "Destroy", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
+            </div>
+          <% else %>
+            <%= link_to 'add logged in hours', edit_project_task_path(@task.project, @task), class: 'btn btn-secondary' %>
+          <% end %>
         </div>
         <h5 class="card-title mb-2">
-          <span><%= @task.name %></span>
-          <p><%= @task.description %></p>
+          <h5><strong>Name: <%= @task.name %></strong></h5>
+          <p><strong>Description: </strong><%= @task.description %></p>
         </h5>
       </div>
     </div>
