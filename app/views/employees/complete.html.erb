@@ -1,4 +1,7 @@
 <div class='card-body'>
-  <h3>Tasks Completed</h3>
+  <div class="d-flex justify-content-between">
+    <h3>Tasks Completed</h3>
+    <%= link_to 'Download Status Report for Completed Tasks', employees_complete_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
+  </div>
   <%= render "employees/form" %>
 </div>

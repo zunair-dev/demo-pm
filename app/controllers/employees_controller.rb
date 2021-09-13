@@ -5,6 +5,12 @@ class EmployeesController < ApplicationController
       redirect_to root_path
     else
       @tasks = current_user.tasks.where.not(status: 'complete')
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "status report", template: "employees/pdf.html.erb"   # Excluding ".pdf" extension.
+        end
+      end
     end
   end
 
@@ -13,6 +19,12 @@ class EmployeesController < ApplicationController
       redirect_to root_path
     else
       @tasks = current_user.tasks.where(status: 'complete')
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "status report", template: "employees/pdf.html.erb"   # Excluding ".pdf" extension.
+        end
+      end
     end
   end
 
