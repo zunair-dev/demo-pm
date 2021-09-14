@@ -1,37 +1,38 @@
 <div class="card">
+  <center class="mt-3"><h6><b>View Project</b></h6></center> <hr>
   <div class="card-body">
-    <h2 class='card-title d-flex justify-content-between mb-4'>
-      <span><%= @project.name %></span>
+    <h4 class='card-title d-flex justify-content-between mb-4'>
+      <span><b>Name: </b><%= @project.name %></span>
       <div>
-        <%= link_to "Assign Tasks", project_tasks_path(@project), class: "btn btn-light" %>
-        <%= link_to "Edit", edit_project_path(@project), class: "btn btn-light" %>
+        <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
+        <%= link_to "Assign Tasks", project_tasks_path(@project), class: "btn btn-info" %>
+        <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %>
         <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
-    </h2>
+    </h4>
 
-    <div class="mb-4">
-      <h6>Add task</h6>
-      <%= form_for([@task.project, @task]) do |f| %>
-        <% if @task.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-            <ul>
-            <% @task.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="input-group">
-          <%= f.text_field :name, class: "form-control", placeholder: "Enter task name..." %>
-          <div class="input-group-append">
-            <%= f.submit class: "btn btn-primary" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <table>
+      <tr>
+        <td><b>Description: </b></td>
+        <td><%= @project.description %></td>
+      </tr>
+      <tr>
+        <td><b>Hours required: </b></td>
+        <td><%= @project.hours %></td>
+      </tr>
+      <tr>
+        <td><b>Tasks created: </b></td>
+        <td><%= @project.tasks.count %></td>
+      </tr>
+      <tr>
+        <td><b>Manager: </b></td>
+        <td><%= User.find(@project.user_id).name %></td>
+      </tr>
+      <tr>
+        <td><b>Status: </b></td>
+        <td><%= @project.status %></td>
+      </tr>
+    </table> <br> <hr> <br>
 
     <h4>Tasks</h4>
     <% @project.tasks.each do |task| %>
