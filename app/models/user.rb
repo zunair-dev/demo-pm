@@ -11,4 +11,9 @@ class User < ApplicationRecord
     ['Employee', 0],
     ['Admin', 1]
   ]
+
+  DESIGNATIONS = [
+    'Chief Executive Officer', 'Project Manager', 'Human Resources',
+    'Software Engineer', 'Associate Software Engineer','Employee', 
+  ]
 end
