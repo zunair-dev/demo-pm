@@ -5,7 +5,6 @@
       <span><b>Name: </b><%= @project.name %></span>
       <div>
         <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
-        <%= link_to "Assign Tasks", project_tasks_path(@project), class: "btn btn-info" %>
         <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %>
         <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
@@ -34,30 +33,41 @@
       </tr>
     </table> <br> <hr> <br>
 
-    <h4>Tasks</h4>
-    <% @project.tasks.each do |task| %>
-      <% if task.persisted? %>
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class='d-flex justify-content-between'>
-              <span class="badge badge-primary mb-3">Status: <%= task.status %></span> | 
-              <span class="badge badge-primary mb-3">Total hours: <%= task.hours %></span> | 
-              <span class="badge badge-primary mb-3">Hours worked: <%= task.hours_worked %></span>
-              <div>
-                <%= link_to "Assign", assign_project_task_path(task.project, task), class: "btn btn-light btn-secondary" %>
-                <%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-light btn-secondary" %>
-                <%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
-              </div>
-            </div>
-            <%= link_to project_task_path(@project, task), class: "text-decoration-none" do %>
-              <h5 class="card-title mb-2">
-                <span><%= task.name %></span>
-                <p><%= task.description %></p>
-              </h5>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+    <h5>Tasks related to the project: <b><%= @project.name %></b></h5> <br>
+    <% if @project.tasks.count == 0 %>
+      <div class="card-body">
+        <center><i>No tasks created yet!</i></center>
+      </div>
+    <% else %>
+      <table style="width:100%">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Assigned to</th>
+          <th>Hour required</th>
+          <th>Hours worked</th>
+          <th></th>
+        </tr>
+        <% @project.tasks.each do |task| %>
+          <% if task.persisted? %>
+          <tr>
+            <td><%= task.name %></td>
+            <td><%= task.description %></td>
+            <td><%= task.status %></td>
+            <td><%= if task.user_id?
+                      User.find(task.user_id).name
+                    else
+                      "N/A"
+                    end %></td>
+            <td><%= task.hours %></td>
+            <td><%= task.hours_worked %></td>
+            <td><%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %>
+            <%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </table>
     <% end %>
 
   </div>
