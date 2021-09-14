@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'employees/complete'
   get 'users/new'
   get 'users/index'
-  post 'employees',  to: 'users#add_user'
+  post 'employees/', to: 'users#create'
   resources :projects do
     resources :tasks do
       member do
