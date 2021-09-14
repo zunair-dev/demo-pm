@@ -1,16 +1,30 @@
-<h1>All Employees</h1>
+<div class='card-body'>
+  <h4>All Employees</h4> <br>
+  <% if @user.count == 0 %>
+    <div class="card">
+      <center><i>No employees available yet!</i></center>
+    </div>
+  <% else %>
+    <table style="width:100%;">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>email</th>
-    <th></th>
-  </tr>
-
-<% @user.each do |user| %>
-  <tr>
-    <td><%= user.id %></td>
-    <td><%= user.email %></td>
-  </tr>
-<% end %>
-</table>
+      <% @user.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.designation %></td>
+          <td><%= link_to 'Show' %></td>
+          <td><%= link_to 'Edit' %></td>
+          <td><%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>
