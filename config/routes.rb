@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get 'users/index'
   post 'employees/', to: 'users#create'
   resources :projects do
+    collection do
+      get 'all'
+    end
     resources :tasks do
       member do
         get 'assign'
