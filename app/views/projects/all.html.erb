@@ -1,22 +1,4 @@
 <div class='card-body'>
   <h3>All Projects</h3>
-  <% if @projects.count == 0 %>
-    <div class="card">
-      <center><i>No projects available here!</i></center>
-    </div>
-  <% else %>
-    <% @projects.each do |project| %>
-      <%= link_to project, class: "text-decoration-none" do %>
-        <div class="card project-card mb-3">
-          <div class="card-body">
-            <span class="badge badge-primary mb-3">Time: <%= project.hours %> hours</span> |
-            <span class="badge badge-primary mb-3">Cost: <%= project.cost %> k</span> |
-            <span class="badge badge-primary mb-3">Status: <%= project.status %> </span>
-            <h5 class='card-title text-dark'><b><%= project.name %></b></h5>
-            <p><%= project.description %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= render 'projects' %>
 </div>
