@@ -15,18 +15,15 @@ class TasksController < ApplicationController
   # GET projects/1/tasks/new
   def new
     @task = @project.tasks.build
-    @user = User.where(admin: false).pluck(:name)
   end
 
   # GET projects/1/tasks/1/edit
   def edit
-    @user = User.where(admin: false).ids
   end
 
   # POST projects/1/tasks
   def create
     @task = @project.tasks.build(task_params)
-    @user = User.where(admin: false).ids
 
     if @task.save
       redirect_to(@task.project)
@@ -38,7 +35,6 @@ class TasksController < ApplicationController
   def assign
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
-    @user = User.where(admin: false).ids
   end
 
   # PUT projects/1/tasks/1
