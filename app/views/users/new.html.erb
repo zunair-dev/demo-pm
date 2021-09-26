@@ -1,27 +1,31 @@
-<h2>Adding a new user</h2>
+<% if current_user.admin? %>
+  <h2>Adding a new user</h2>
 
-<%= form_for User.new , :url => {:action => "create"} do |user| %>
-  <div class="form-group">
-    <%= user.label :name %><br />
-    <%= user.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= user.label :email %><br />
-    <%= user.email_field :email, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= user.label :Designation %><br />
-    <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
-  </div>
-
-  <% if current_user.id == 1 %>
+  <%= form_for User.new , :url => {:action => "create"} do |user| %>
     <div class="form-group">
-      <%= user.label :Role %><br />
-      <%= user.select :admin, User::ROLE_OPTIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+      <%= user.label :name %><br />
+      <%= user.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= user.label :email %><br />
+      <%= user.email_field :email, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= user.label :Designation %><br />
+      <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+    </div>
+
+    <% if current_user.id == 1 %>
+      <div class="form-group">
+        <%= user.label :Role %><br />
+        <%= user.select :admin, User::ROLE_OPTIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+      </div>
+    <% end %>
+
+    <div class="add">
+      <%= user.submit class:'btn btn-primary'%>
     </div>
   <% end %>
-
-  <div class="add">
-    <%= user.submit class:'btn btn-primary'%>
-  </div>
+<% else %>
+  <p><i>Sorry you're not authorized!</i></p>
 <%end%>
