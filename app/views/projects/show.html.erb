@@ -48,6 +48,8 @@
           <th>Hour required</th>
           <th>Hours worked</th>
           <th></th>
+          <th></th>
+          <th></th>
         </tr>
         <% @project.tasks.each do |task| %>
           <% if task.persisted? %>
@@ -62,8 +64,9 @@
                     end %></td>
             <td><%= task.hours %></td>
             <td><%= task.hours_worked %></td>
-            <td><%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %>
-            <%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
+            <td><%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %></td>
+            <td><%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
           </tr>
           <% end %>
         <% end %>

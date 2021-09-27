@@ -9,7 +9,7 @@
           <span class="badge badge-primary mb-3">Hours worked: <%= @task.hours_worked %></span>
           <% if current_user.admin == true %>
             <div>
-              <%= link_to "assign", assign_project_task_path(project_id: @task.project.id, task_id: @task.id), class: "btn btn-light btn-sm" %>
+              <%= link_to "assign", assign_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
               <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
               <%= link_to "Destroy", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
             </div>

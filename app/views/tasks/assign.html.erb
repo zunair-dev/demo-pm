@@ -18,7 +18,7 @@
             <%= form_with(model: [@task.project, @task])  do |t| %>
               <div class="form-group">
                 <%= t.label :SelectUser %><br />
-                <%= t.select :user_id, @user, {}, class: 'form-control mb-2' %>
+                <%= t.collection_select(:user_id, User.where(admin: false), :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
               </div>
               <div class="actions">
                 <%= t.submit class: 'btn btn-primary mt-2' %>

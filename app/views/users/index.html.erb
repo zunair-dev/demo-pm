@@ -20,9 +20,9 @@
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.designation %></td>
-          <td><%= link_to 'Show' %></td>
-          <td><%= link_to 'Edit' %></td>
-          <td><%= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', users_index_path, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Edit', users_index_path, class: 'btn btn-secondary' %></td>
+          <td><%= link_to 'Destroy', users_index_path, data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </table>
