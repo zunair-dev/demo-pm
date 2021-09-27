@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ show edit update destroy ]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
+  before_action :check_admin
 
   # GET /projects or /projects.json
   def index
@@ -84,5 +85,11 @@ class ProjectsController < ApplicationController
 
     def add_index_breadcrumb
       add_breadcrumbs('All Projects', all_projects_path)
+    end
+
+    def check_admin
+      if current_user.admin == false
+        redirect_to employees_index_path
+      end
     end
 end
