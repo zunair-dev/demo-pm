@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   def index
     @user = User.where(admin: false)
+    add_breadcrumbs('All Users')
   end
   
   def new
     @user = User.new
+    add_breadcrumbs('New User')
   end
 
   def create
