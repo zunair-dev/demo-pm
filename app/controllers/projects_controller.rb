@@ -5,14 +5,14 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     if current_user.admin?
-      @projects = current_user.projects
+      @projects = current_user.projects.paginate(page: params[:page], per_page: 4)
     else
       redirect_to employees_index_path
     end
   end
 
   def all
-    @projects = Project.all
+    @projects = Project.all.paginate(page: params[:page], per_page: 4)
   end
 
   # GET /projects/1 or /projects/1.json
