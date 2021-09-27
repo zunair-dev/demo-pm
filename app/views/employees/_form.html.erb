@@ -16,5 +16,5 @@
     </div>
   </div>
 <% end %>
-  <%= will_paginate @tasks %>
+  <%= will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "Older", next_label: "Newer", inner_window: 1, outer_window: 0  %>
 <% end %>

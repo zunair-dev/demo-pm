@@ -10,6 +10,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'pundit'
 gem 'will_paginate'
+gem 'will_paginate-bootstrap4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
