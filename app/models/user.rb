@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :projects, dependent: :destroy
   has_many :tasks
+  has_and_belongs_to_many :projects
 
   ROLE_OPTIONS = [
     ['Employee', 0],
