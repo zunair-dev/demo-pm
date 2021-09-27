@@ -18,7 +18,7 @@
     <% if current_user.id == 1 %>
       <div class="form-group">
         <%= user.label :Role %><br />
-        <%= user.select :admin, User::ROLE_OPTIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+        <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
       </div>
     <% end %>
 
