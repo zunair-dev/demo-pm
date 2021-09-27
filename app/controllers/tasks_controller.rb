@@ -2,23 +2,28 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :add_index_breadcrumb, only: [:show, :edit, :new]
 
   # GET projects/1/tasks
   def index
     @tasks = @project.tasks
+    add_breadcrumbs('All Tasks')
   end
 
   # GET projects/1/tasks/1
   def show
+    add_breadcrumbs(@task.name)
   end
 
   # GET projects/1/tasks/new
   def new
     @task = @project.tasks.build
+    add_breadcrumbs('New Task')
   end
 
   # GET projects/1/tasks/1/edit
   def edit
+    add_breadcrumbs('Edit')
   end
 
   # POST projects/1/tasks
@@ -70,5 +75,9 @@ class TasksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def task_params
       params.require(:task).permit(:name, :description, :status, :project_id, :hours_worked, :hours, :user_id)
+    end
+
+    def add_index_breadcrumb
+      add_breadcrumbs('Project', project_path(@project))
     end
 end

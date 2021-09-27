@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :add_index_breadcrumb, only: [:show, :edit, :new]
 
   # GET /projects or /projects.json
   def index
@@ -13,20 +14,24 @@ class ProjectsController < ApplicationController
 
   def all
     @projects = Project.all.paginate(page: params[:page], per_page: 4)
+    add_breadcrumbs('All Projects')
   end
 
   # GET /projects/1 or /projects/1.json
   def show
     @task = @project.tasks.build
+    add_breadcrumbs(@project.name)
   end
 
   # GET /projects/new
   def new
     @project = current_user.projects.build
+    add_breadcrumbs('New')
   end
 
   # GET /projects/1/edit
   def edit
+    add_breadcrumbs('Edit')
   end
 
   # POST /projects or /projects.json
@@ -75,5 +80,9 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       params.require(:project).permit(:name, :description, :hours, :cost, :status)
+    end
+
+    def add_index_breadcrumb
+      add_breadcrumbs('All Projects', all_projects_path)
     end
 end
