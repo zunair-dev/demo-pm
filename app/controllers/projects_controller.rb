@@ -6,11 +6,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    if current_user.admin?
-      @projects = current_user.projects.paginate(page: params[:page], per_page: 4)
-    else
-      redirect_to employees_index_path
-    end
+    @projects = current_user.projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
   end
 
   def all
