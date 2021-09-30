@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = current_user.projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
+    @projects = current_user.self_projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
   end
 
   def all
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = current_user.projects.build
+    @project = current_user.self_projects.build
     add_breadcrumbs('New')
   end
 
