@@ -31,6 +31,16 @@
         <td><b>Status: </b></td>
         <td><%= @project.status %></td>
       </tr>
+      <tr>
+        <td><b>Employees: </b></td>
+        <% if @project.users.any? %>
+          <% @project.users.each do |u| %>
+            <td><%= u.name %></td>
+          <% end %>
+        <% else %>
+          <td>N/A</td>
+        <%end%>
+      </tr>
     </table> <br> <hr> <br>
 
     <h5>Tasks related to the project: <b><%= @project.name %></b></h5> <br>
