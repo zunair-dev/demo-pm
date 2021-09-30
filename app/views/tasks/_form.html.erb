@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
       <%= f.label "Select User" %><br />
-      <%= f.collection_select(:user_id, User.where(admin: false), :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
+      <%= f.collection_select(:user_id, @project.users, :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
     </div>
   <%else%>
     <div class="form-group">
