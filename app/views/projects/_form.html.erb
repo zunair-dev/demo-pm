@@ -31,7 +31,11 @@
     <%= form.text_field :hours, class: 'form-control' %>
   </div>
 
-
+  <div class="form-group">
+    <%= form.label "Select Employee" %><br />
+    <%= form.collection_select(:emp, User.where(admin: false), :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
+  </div>
+  
   <div class="actions">
     <%= form.submit class: 'mt-2 btn btn-warning' %>
   </div>

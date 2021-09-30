@@ -33,10 +33,11 @@ class ProjectsController < ApplicationController
 
   # POST /projects or /projects.json
   def create
-    @project = current_user.projects.build(project_params)
+    @project = current_user.self_projects.build(project_params)
 
     respond_to do |format|
       if @project.save
+        @project.users << User.find(params[:project][:emp])
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -48,6 +49,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    @project.users << User.find(params[:project][:emp])
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
