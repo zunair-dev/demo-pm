@@ -4,8 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
-  has_many :projects, dependent: :destroy
+  has_many :self_projects, class_name: "Project", dependent: :destroy
   has_many :tasks
+  has_many :assigns
+  has_many :projects, through: :assigns
 
   ROLE_OPTIONS = [
     ['Employee', 0],
