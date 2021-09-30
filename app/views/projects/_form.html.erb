@@ -32,6 +32,16 @@
   </div>
 
   <div class="form-group">
+    <%= form.label "Starting Date" %>
+    <%= form.date_field :starting_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Ending Date" %>
+    <%= form.date_field :ending_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= form.label "Select Employee" %><br />
     <%= form.collection_select(:emp, User.where(admin: false), :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
   </div>

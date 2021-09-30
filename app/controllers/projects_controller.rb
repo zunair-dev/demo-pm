@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, :hours, :cost, :status)
+      params.require(:project).permit(:name, :description, :hours, :cost, :status, :starting_date, :ending_date)
     end
 
     def add_index_breadcrumb

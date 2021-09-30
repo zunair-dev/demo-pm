@@ -32,6 +32,14 @@
         <td><%= @project.status %></td>
       </tr>
       <tr>
+        <td><b>Starting Date: </b></td>
+        <td><%= @project.starting_date %></td>
+      </tr>
+      <tr>
+        <td><b>Ending Date: </b></td>
+        <td><%= @project.ending_date %></td>
+      </tr>
+      <tr>
         <td><b>Employees: </b></td>
         <% if @project.users.any? %>
           <% @project.users.each do |u| %>
