@@ -53,7 +53,7 @@ class EmployeesController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          render pdf: "status report", template: "employees/pdf.html.erb"
+          render pdf: "status report", template: "employees/projects_pdf.html.erb"
         end
       end
     end
@@ -68,7 +68,7 @@ class EmployeesController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          render pdf: "status report", template: "employees/pdf.html.erb"
+          render pdf: "status report", template: "employees/projects_pdf.html.erb"
         end
       end
     end
@@ -83,7 +83,7 @@ class EmployeesController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          render pdf: "status report", template: "employees/pdf.html.erb"
+          render pdf: "status report", template: "employees/projects_pdf.html.erb"
         end
       end
     end
