@@ -29,6 +29,18 @@
           <%= link_to "Completed Tasks", employees_complete_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
+          <%= link_to "View All Tasks", employees_tasks_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "View Active Projects", employees_active_projects_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "View Completed Projects", employees_completed_projects_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "View All Projects", employees_projects_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'Download General Status Report', employees_pdf_path(current_user, format: :pdf), class: 'nav-link' %>
         </li>
       </ul>

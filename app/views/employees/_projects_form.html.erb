@@ -1,0 +1,18 @@
+<% if @projects.count == 0 %>
+  <div class="card">
+    <center><i>No projects available here!</i></center>
+  </div>
+<% else %>
+<% @projects.each do |t| %>
+  <div class="card project-card mb-3">
+    <div class="card-body">
+      <span class="badge badge-primary mb-3"><%= t.status %> </span> |
+      <span class="badge badge-primary mb-3"><%= t.hours %> hour's required </span> |
+      <span class="badge badge-primary mb-3"> <%= t.cost %> cost </span> 
+      <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+      <p><%= t.description %></p>
+    </div>
+  </div>
+<% end %>
+  <%= will_paginate @projects, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "Older", next_label: "Newer", inner_window: 1, outer_window: 0  %>
+<% end %>
