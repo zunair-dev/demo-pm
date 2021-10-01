@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        @project.users << User.find(params[:project][:emp])
+        @project.users << User.find(params[:project][:emp]) unless params[:project][:emp].blank?
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
-    @project.users << User.find(params[:project][:emp])
+    @project.users << User.find(params[:project][:emp]) unless params[:project][:emp].blank?
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
