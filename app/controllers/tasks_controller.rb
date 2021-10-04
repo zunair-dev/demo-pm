@@ -29,11 +29,12 @@ class TasksController < ApplicationController
   # POST projects/1/tasks
   def create
     @task = @project.tasks.build(task_params)
-
-    if @task.save
-      redirect_to(@task.project)
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task.project, notice: "Task was successfully created." }
+      else
+        render action: 'new'
+      end
     end
   end
 
@@ -45,10 +46,12 @@ class TasksController < ApplicationController
   # PUT projects/1/tasks/1
   def update
     if @task.update(task_params)
-      if current_user.admin == true
-        redirect_to(@task.project)
-      else
-        redirect_to(employees_index_path)
+      respond_to do |format|
+        if current_user.admin == true
+          format.html { redirect_to @task.project, notice: "Task was successfully updated." }
+        else
+          redirect_to(employees_index_path)
+        end
       end
     else
       render action: 'edit'
@@ -58,8 +61,10 @@ class TasksController < ApplicationController
   # DELETE projects/1/tasks/1
   def destroy
     @task.destroy
-
-    redirect_to @project
+    respond_to do |format|
+      format.html { redirect_to @project, alert: "Task was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
