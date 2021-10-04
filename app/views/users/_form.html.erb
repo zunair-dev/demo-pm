@@ -1,4 +1,11 @@
 <%= form_with(model: @user) do |user| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <% @user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </div>
+  <% end %>
 
 <div class="form-group">
     <%= user.label :name %>

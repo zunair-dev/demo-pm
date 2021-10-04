@@ -2,6 +2,13 @@
   <h2>Adding a new user</h2>
 
   <%= form_for User.new , :url => {:action => "create"} do |user| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </div>
+    <% end %>
     <div class="form-group">
       <%= user.label :name %><br />
       <%= user.text_field :name, class: 'form-control' %>

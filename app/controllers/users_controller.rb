@@ -13,11 +13,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to users_index_path, notice: "User was successfully created." }
-      end
+    
+    if @user.save
+      flash[:notice] = "User was created successfully."
+      redirect_to users_path
+    else
+      render "new"
     end
   end
 

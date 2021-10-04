@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   get 'employees/projects'
   get 'employees/active_projects'
   get 'employees/completed_projects'
-  # get 'users/new'
-  # get 'users/index'
-  resources :users
-  post 'employees/', to: 'users#create'
+  devise_for :users
+  resources :users, except: [:create]
+  post 'new_user/', to: 'users#create'
   resources :projects do
     collection do
       get 'all'
@@ -28,7 +27,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "projects#index"
 end
