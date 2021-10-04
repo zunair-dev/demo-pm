@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get 'employees/projects'
   get 'employees/active_projects'
   get 'employees/completed_projects'
-  get 'users/new'
-  get 'users/index'
+  # get 'users/new'
+  # get 'users/index'
+  resources :users
   post 'employees/', to: 'users#create'
   resources :projects do
     collection do

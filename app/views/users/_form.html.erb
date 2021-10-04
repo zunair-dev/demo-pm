@@ -1,0 +1,26 @@
+<%= form_with(model: @user) do |user| %>
+
+<div class="form-group">
+    <%= user.label :name %>
+    <%= user.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= user.label :email %>
+    <%= user.email_field :email, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= user.label :Designation %><br />
+    <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+  </div>
+
+  <% if current_user.id == 1 %>
+    <div class="form-group">
+      <%= user.label :Role %><br />
+      <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
+    </div>
+  <% end %>
+
+  <div class="add">
+    <%= user.submit class:'btn btn-warning'%>
+  </div>
+<% end %>

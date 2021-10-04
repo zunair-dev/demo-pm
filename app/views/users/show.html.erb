@@ -1,0 +1,33 @@
+<div class="card-body">
+  <h3>View User</h3>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4 class='card-title d-flex justify-content-between mb-4'>
+        <span><b>Name: </b><%= @user.name %></span>
+        <div>
+          <%= link_to "Edit", edit_user_path(@user), class: "btn btn-secondary btn-sm" %>
+          <%= link_to "Destroy", @user, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+        </div>
+      </h4>
+
+      <table>
+        <tr>
+          <td><b>Email: </b></td>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <td><b>Role: </b></td>
+          <% if @user.admin == true %>
+            <td><%= "Admin" %></td>
+          <% else %>
+            <td><%= "Employee" %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><b>Designation: </b></td>
+          <td><%= @user.designation %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
