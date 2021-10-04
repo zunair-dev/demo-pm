@@ -3,9 +3,9 @@
 
   <%= form_for User.new , :url => {:action => "create"} do |user| %>
     <% if @user.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" class="bg-danger">
         <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <%= error.full_message %>
         <% end %>
       </div>
     <% end %>
