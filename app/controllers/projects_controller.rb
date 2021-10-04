@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
+    # flash.now[:alert] = "We have exactly"
     @projects = current_user.self_projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
   end
 
