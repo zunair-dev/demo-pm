@@ -2,7 +2,7 @@
   <%= render "shared/breadcrumbs" %>
   <% if current_user.admin == true %>  
     <div
-      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <h1 class="h2">Admin's Dashboard</h1>
       <div class="d-flex justify-content-between">
         <%= link_to "New Project", new_project_path, class: "btn btn-primary mx-2" %>
@@ -12,7 +12,7 @@
     </div>
     <% else %>
     <div
-      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
       <h1 class="h2">Employee's Dashboard</h1>
     </div>
   <% end %>

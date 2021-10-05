@@ -14,6 +14,8 @@ gem 'will_paginate-bootstrap4'
 gem 'popper_js'
 gem 'jquery-rails'
 gem 'popper'
+gem "chartkick"
+gem 'groupdate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'

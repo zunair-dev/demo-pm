@@ -4,13 +4,13 @@
     <h4 class='card-title d-flex justify-content-between mb-4'>
       <span><b>Name: </b><%= @project.name %></span>
       <div>
-        <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"> Create Task </button>
+        <%# <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Edit Project </button>
         <%# <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %> 
         <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
     </h4>
-
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -21,7 +21,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <%= render "form", project: @project %>
+            <%= render "form", project: @project %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -30,50 +30,59 @@
       </div>
     </div>
 
-    <table>
-      <tr>
-        <td><b>Description: </b></td>
-        <td><%= @project.description %></td>
-      </tr>
-      <tr>
-        <td><b>Hours required: </b></td>
-        <td><%= @project.hours %></td>
-      </tr>
-      <tr>
-        <td><b>Estimated Cost: </b></td>
-        <td><%= @project.cost %></td>
-      </tr>
-      <tr>
-        <td><b>Tasks created: </b></td>
-        <td><%= @project.tasks.count %></td>
-      </tr>
-      <tr>
-        <td><b>Manager: </b></td>
-        <td><%= User.find(@project.user_id).name %></td>
-      </tr>
-      <tr>
-        <td><b>Status: </b></td>
-        <td><%= @project.status %></td>
-      </tr>
-      <tr>
-        <td><b>Starting Date: </b></td>
-        <td><%= @project.starting_date %></td>
-      </tr>
-      <tr>
-        <td><b>Ending Date: </b></td>
-        <td><%= @project.ending_date %></td>
-      </tr>
-      <tr>
-        <td><b>Employees: </b></td>
-        <% if @project.users.any? %>
-          <% @project.users.each do |u| %>
-            <td><%= u.name %></td>
-          <% end %>
-        <% else %>
-          <td>N/A</td>
-        <%end%>
-      </tr>
-    </table> <br> <hr> <br>
+    <div class="row">
+      <div class="col">
+        <table>
+          <tr>
+            <td><b>Description: </b></td>
+            <td><%= @project.description %></td>
+          </tr>
+          <tr>
+            <td><b>Hours required: </b></td>
+            <td><%= @project.hours %></td>
+          </tr>
+          <tr>
+            <td><b>Estimated Cost: </b></td>
+            <td><%= @project.cost %></td>
+          </tr>
+          <tr>
+            <td><b>Tasks created: </b></td>
+            <td><%= @project.tasks.count %></td>
+          </tr>
+          <tr>
+            <td><b>Manager: </b></td>
+            <td><%= User.find(@project.user_id).name %></td>
+          </tr>
+          <tr>
+            <td><b>Status: </b></td>
+            <td><%= @project.status %></td>
+          </tr>
+          <tr>
+            <td><b>Starting Date: </b></td>
+            <td><%= @project.starting_date %></td>
+          </tr>
+          <tr>
+            <td><b>Ending Date: </b></td>
+            <td><%= @project.ending_date %></td>
+          </tr>
+          <tr>
+            <td><b>Employees: </b></td>
+            <% if @project.users.any? %>
+              <% @project.users.each do |u| %>
+                <td><%= u.name %></td>
+              <% end %>
+            <% else %>
+              <td>N/A</td>
+            <%end%>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <%= line_chart @project.tasks.group_by_minute(:created_at).count %>
+      </div>
+    </div>
+
+     <br> <hr> <br>
 
     <h5>Tasks related to the project: <b><%= @project.name %></b></h5> <br>
     <%= render "shared/search", url: project_path(@project) %>
@@ -119,6 +128,24 @@
         <% end %>
       </table>
     <% end %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Editing Project</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= render "tasks/form", project: @project, task: @task %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
