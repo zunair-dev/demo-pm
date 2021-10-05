@@ -2,7 +2,7 @@ Hi <h1><%= @user.name %></h1>A new task "<%= @task.name %></h1>" is assigned to 
 <h3>Details</h3>
 <p>
   Task's Description: <%= @task.description %>.<br>
-  Task related to the Project: <%= Project.find(@task.project_id) %>.<br>
+  Task related to the Project: <% p = Project.find(@task.project_id) %><%= p.name %>.<br>
   Task's Status: <%= @task.status %>.<br>
   Task's Hours Required to Work: <%= @task.hours %>.<br>
   Task's Starting Date: <%= @task.starting_date %>.<br>
