@@ -23,4 +23,12 @@ class Task < ApplicationRecord
   def pending?
     status == 'pending'
   end
+
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
 end

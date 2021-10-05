@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1 or /projects/1.json
   def show
     @task = @project.tasks.build
+    @project.tasks = @project.tasks.search(params[:search])
     add_breadcrumbs(@project.name)
   end
 
