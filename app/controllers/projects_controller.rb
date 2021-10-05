@@ -6,11 +6,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = current_user.self_projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
+    @projects = current_user.self_projects.search(params[:search]).paginate(page: params[:page], per_page: 4)
   end
 
   def all
-    @projects = Project.all.paginate(page: params[:page], per_page: 4)
+    @projects = Project.search(params[:search]).paginate(page: params[:page], per_page: 4)
     add_breadcrumbs('All Projects')
   end
 
@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, :hours, :cost, :status, :starting_date, :ending_date)
+      params.require(:project).permit(:name, :description, :hours, :cost, :status, :starting_date, :ending_date, :search)
     end
 
     def add_index_breadcrumb
