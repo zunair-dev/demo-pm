@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    # flash.now[:alert] = "We have exactly"
     @projects = current_user.self_projects.paginate(page: params[:page], per_page: 4) if current_user.admin?
   end
 
@@ -38,7 +37,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        @project.users << User.find(params[:project][:emp]) unless params[:project][:emp].blank?
+        Assign.create(project_id: @project.id, user_id: User.find(params[:project][:emp]).id) unless params[:project][:emp].blank?
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -50,7 +49,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
-    @project.users << User.find(params[:project][:emp]) unless params[:project][:emp].blank?
+    Assign.create(project_id: @project.id, user_id: User.find(params[:project][:emp]).id) unless params[:project][:emp].blank?
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
