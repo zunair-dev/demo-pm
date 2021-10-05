@@ -31,4 +31,13 @@ class Task < ApplicationRecord
       all
     end
   end
+
+  def self.searchTask(search)
+    # byebug
+    if search
+      where.not(status: 'complete').where('name LIKE ?', "%#{search}%")
+    else
+      where.not(status: 'complete')
+    end
+  end
 end

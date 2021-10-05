@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
     if current_user.admin?
       redirect_to root_path
     else
-      @tasks = current_user.tasks.where.not(status: 'complete').paginate(page: params[:page], per_page: 4)
+      @tasks = current_user.tasks.searchTask(params[:search]).paginate(page: params[:page], per_page: 4)
       respond_to do |format|
         format.html
         format.pdf do
