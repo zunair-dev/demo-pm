@@ -1,0 +1,12 @@
+Hi <h1><%= @user.name %></h1>A new task "<%= @task.name %></h1>" is assigned to you. 
+<h3>Details</h3>
+<p>
+  Task's Description: <%= @task.description %>.<br>
+  Task related to the Project: <%= Project.find(@task.project_id) %>.<br>
+  Task's Status: <%= @task.status %>.<br>
+  Task's Hours Required to Work: <%= @task.hours %>.<br>
+  Task's Starting Date: <%= @task.starting_date %>.<br>
+  Task's Ending Date: <%= @task.ending_date %>.<br>
+</p>
+<p>To View the new assigned task, just follow this link: <%= @url %>.</p>
+<p>Thanks for you time, have a great day!</p>

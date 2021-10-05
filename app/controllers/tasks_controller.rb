@@ -31,6 +31,9 @@ class TasksController < ApplicationController
     @task = @project.tasks.build(task_params)
     respond_to do |format|
       if @task.save
+        byebug
+        @user = User.find(@task.user_id)
+        UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later
         format.html { redirect_to @task.project, notice: "Task was successfully created." }
       else
         render action: 'new'
