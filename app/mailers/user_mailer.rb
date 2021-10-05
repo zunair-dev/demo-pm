@@ -3,7 +3,14 @@ class UserMailer < ApplicationMailer
 
   def welcome_email
     @user = params[:user]
-    @url  = 'http://example.com/login'
+    @url  = root_url
     mail(to: @user.email, subject: 'Welcome to My Awesome Site - Project Management powered by Xprolabs!')
+  end
+
+  def send_credentials
+    @user = params[:user]
+    @password = params[:password]
+    @url  = root_url
+    mail(to: @user.email, subject: "Your credentials")
   end
 end

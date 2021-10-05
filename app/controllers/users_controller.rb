@@ -12,10 +12,13 @@ class UsersController < ApplicationController
   end
 
   def create
+    @password = Random.rand(111111...999999)
     @user = User.new(user_params)
+    @user.password = @password
     
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
+      UserMailer.with(user: @user, password: @password).send_credentials.deliver_later
       flash[:notice] = "User was created successfully."
       redirect_to users_path
     else

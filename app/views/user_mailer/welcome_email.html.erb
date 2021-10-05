@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Welcome to ProjectManagement.com, <%= @user.name %></h1>
-    <p>
-      You have successfully signed up to ProjectManagement.com,
-      your username is: <%= @user.email %>.<br>
-      your password is: <%= @user.password %>.<br>
-    </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
-  </body>
-</html>
+<h1>Welcome to ProjectManagement.com, <%= @user.name %></h1>
+<p>
+  You have successfully signed up to ProjectManagement.com,<br>
+  your email is: <%= @user.email %>.<br>
+  your name is: <%= @user.name %>.<br>
+  your designation is: <%= @user.designation %>.<br>
+</p>
+<p>To login to the site, just follow this link: <%= @url %>.</p>
+<p>Thanks for joining and have a great day!</p>
