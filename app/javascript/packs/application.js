@@ -7,14 +7,11 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import 'bootstrap'
-import "chartkick/chart.js"
-//= require popper
 //= require toastr
 //= require jquery
 //= require jquery_ujs
-//= require chartkick
-//= require Chart.bundle
+//= require popper
+import 'bootstrap'
 
 Rails.start()
 Turbolinks.start()
