@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ show edit update destroy ]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
-  before_action :check_admin
+  before_action :authenticate
 
   # GET /projects or /projects.json
   def index
@@ -72,23 +72,21 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def project_params
-      params.require(:project).permit(:name, :description, :hours, :cost, :status, :starting_date, :ending_date, :search)
-    end
+  # Only allow a list of trusted parameters through.
+  def project_params
+    params.require(:project).permit(:name, :description, :hours, :cost, :status, :starting_date, :ending_date, :search)
+  end
 
-    def add_index_breadcrumb
-      add_breadcrumbs('All Projects', all_projects_path)
-    end
+  def add_index_breadcrumb
+    add_breadcrumbs('All Projects', all_projects_path)
+  end
 
-    def check_admin
-      if current_user.admin == false
-        redirect_to employees_index_path
-      end
-    end
+  def authenticate
+    authorize Project
+  end
 end

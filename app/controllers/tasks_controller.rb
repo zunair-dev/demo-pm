@@ -3,6 +3,8 @@ class TasksController < ApplicationController
   before_action :set_project
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
+  before_action :authenticate, except: [:show, :edit, :update]
+  before_action :verify_user, only: [:show, :edit, :update]
 
   # GET projects/1/tasks
   def index
@@ -73,21 +75,32 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:project_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
 
-    def set_task
-      @task = @project.tasks.find(params[:id])
-    end
+  def set_task
+    @task = @project.tasks.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def task_params
-      params.require(:task).permit(:name, :description, :status, :project_id, :hours_worked, :hours, :user_id, :starting_date, :ending_date)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def task_params
+    params.require(:task).permit(:name, :description, :status, :project_id, :hours_worked, :hours, :user_id, :starting_date, :ending_date)
+  end
 
-    def add_index_breadcrumb
-      add_breadcrumbs('Project', project_path(@project))
+  def add_index_breadcrumb
+    add_breadcrumbs('Project', project_path(@project))
+  end
+
+  def authenticate
+    authorize Task
+  end
+
+  def verify_user
+    unless @task.user == current_user || current_user.admin?
+      flash[:alert] = "You're not allowed to do this!"
+      redirect_to root_path
     end
+  end
 end

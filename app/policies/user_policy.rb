@@ -1,14 +1,10 @@
-class ProjectPolicy < ApplicationPolicy
-  
+class UserPolicy < ApplicationPolicy
+
   def index?
     @user.admin?
   end
 
-  def all?
-    @user.admin?
-  end
-
-  def show?
+  def admins?
     @user.admin?
   end
 
@@ -17,6 +13,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
+    @user.admin?
+  end
+
+  def show?
     @user.admin?
   end
 

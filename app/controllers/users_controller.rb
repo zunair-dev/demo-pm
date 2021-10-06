@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
+  before_action :authenticate
   def index 
     @user = User.where(admin: false).order(:id)
     add_breadcrumbs('All Employees')
+    # authorize @user
   end
 
   def admins 
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
       UserMailer.with(user: @user, password: @password).send_credentials.deliver_later
-      flash[:notice] = "User was created successfully."
+      flash[:success] = "User was created successfully."
       redirect_to users_path
     else
       render "new"
@@ -68,5 +70,9 @@ class UsersController < ApplicationController
 
   def add_index_breadcrumb
     add_breadcrumbs('All Users', users_path)
+  end
+
+  def authenticate
+    authorize User
   end
 end
