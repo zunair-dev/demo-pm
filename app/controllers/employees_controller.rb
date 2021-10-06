@@ -34,7 +34,7 @@ class EmployeesController < ApplicationController
       redirect_to root_path
     else
       @tasks = current_user.tasks.paginate(page: params[:page], per_page: 4)
-      add_breadcrumbs('Completed Tasks')
+      add_breadcrumbs('Tasks')
       respond_to do |format|
         format.html
         format.pdf do

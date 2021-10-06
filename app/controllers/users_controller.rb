@@ -3,7 +3,12 @@ class UsersController < ApplicationController
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
   def index 
     @user = User.where(admin: false).order(:id)
-    add_breadcrumbs('All Users')
+    add_breadcrumbs('All Employees')
+  end
+
+  def admins 
+    @user = User.where(admin: true).order(:id)
+    add_breadcrumbs('All Admins')
   end
   
   def new

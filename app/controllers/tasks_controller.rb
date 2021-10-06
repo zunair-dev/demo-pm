@@ -46,20 +46,20 @@ class TasksController < ApplicationController
 
   # PUT projects/1/tasks/1
   def update
-    if @task.update(task_params)
-      if params[:task][:user_id].present?
-        @user = User.find(@task.user_id)
-        UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later
-      end
-      respond_to do |format|
+    respond_to do |format|
+      if @task.update(task_params)
+        if params[:task][:user_id].present?
+          @user = User.find(@task.user_id)
+          UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later
+        end
         if current_user.admin == true
           format.html { redirect_to @task.project, notice: "Task was successfully updated." }
         else
-          redirect_to(employees_index_path)
+          format.html { redirect_to employees_index_path, notice: "Task was successfully updated." }
         end
+      else
+        render action: 'edit'
       end
-    else
-      render action: 'edit'
     end
   end
 

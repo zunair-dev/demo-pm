@@ -2,7 +2,27 @@
   <div class="d-flex justify-content-between">
     <h3>Tasks Assigned</h3>
     <%= link_to 'Download Status Report for Assigned Tasks', employees_index_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> View Your Progress </button>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Your Progress</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= line_chart current_user.projects.group(:name).count %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <%= render "shared/search", url: employees_index_path %>
   <%= render "employees/form" %>
 </div>

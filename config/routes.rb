@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get 'employees/active_projects'
   get 'employees/completed_projects'
   devise_for :users
-  resources :users, except: [:create]
+  resources :users, except: [:create] do
+    collection do
+      get 'admins', to: 'users#admins'
+    end
+  end
   post 'new_user/', to: 'users#create'
   resources :projects do
     collection do
