@@ -70,7 +70,7 @@ class TasksController < ApplicationController
         if current_user.admin == true
           format.html { redirect_to @task.project, notice: "Task was successfully updated." }
         else
-          format.html { redirect_to employees_index_path, notice: "Task was successfully updated." }
+          format.html { redirect_to employees_path, notice: "Task was successfully updated." }
         end
       else
         render action: 'edit'

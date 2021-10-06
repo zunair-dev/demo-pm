@@ -1,7 +1,7 @@
 <div class='card-body'>
   <div class="d-flex justify-content-between">
     <h3>Tasks Assigned</h3>
-    <%= link_to 'Download Status Report for Assigned Tasks', employees_index_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
+    <%= link_to 'Download Status Report for Assigned Tasks', employees_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
   </div>
   <%= render "employees/projects_form" %>
 </div>

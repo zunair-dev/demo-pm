@@ -1,7 +1,7 @@
 <div class='card-body'>
   <div class="d-flex justify-content-between">
     <h3>All Tasks</h3>
-    <%= link_to 'Download Status Report for All Tasks', employees_tasks_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
+    <%= link_to 'Download Status Report for All Tasks', tasks_employees_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
   </div>
   <%= render "employees/form" %>
 </div>

@@ -1,7 +1,7 @@
 <% if current_user %>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap px-2 py-0 shadow">
     <% if current_user.admin == false %>
-      <%= link_to "Project Management", employees_index_path, class: "navbar-brand" %>
+      <%= link_to "Project Management", employees_path, class: "navbar-brand" %>
     <% else %>
       <%= link_to "Project Management", root_path, class: "navbar-brand" %>
     <% end %>

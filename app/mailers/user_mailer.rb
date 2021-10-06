@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
   def send_task_alert
     @user = params[:user]
     @task = params[:task]
-    @url  = employees_tasks_url
+    @url  = tasks.tasks_employees_url
     mail(to: @user.email, subject: "New Task Assigned")
   end
 end
