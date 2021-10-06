@@ -8,6 +8,7 @@
         <%# <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Edit Project </button>
         <%# <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %> 
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropR"> View Status </button>
         <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
     </h4>
@@ -22,6 +23,24 @@
           </div>
           <div class="modal-body">
             <%= render "form", project: @project %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdropR" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">View Status of Tasks by hours</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= line_chart  [{name:'Hours Worked', data: @project.tasks.group(:hours_worked).count}, {name: 'Hours Required', data: @project.tasks.group(:hours).count}], xtitle: "Hours", ytitle: "Count" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
