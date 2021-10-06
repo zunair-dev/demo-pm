@@ -48,8 +48,21 @@ class TasksController < ApplicationController
 
   # PUT projects/1/tasks/1
   def update
+    Task.update_status(params, @task)       # to update tasks status
     respond_to do |format|
       if @task.update(task_params)
+        # to update projects status
+        if @task.status == "complete"
+          if Project.check_whole_status(@task.project)
+            @task.project.status = 1
+          else
+            @task.project.status = 2
+          end
+        else
+          @task.project.status = 0
+        end
+        @task.project.save
+
         if params[:task][:user_id].present?
           @user = User.find(@task.user_id)
           UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later

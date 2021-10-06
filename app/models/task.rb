@@ -2,26 +2,12 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :user, optional: true
 
-  # def status
-  #   if (hours_worked == 0)
-  #     'pending'
-  #   elsif ((hours != hours_worked) && hours_worked != 0)
-  #     'in-progress'
-  #   else
-  #     'pending'
-  #   end
-  # end
+  enum status: [:pending, :complete, :in_progress]
 
-  def complete?
-    status == 'complete'
-  end
-
-  def in_progress?
-    status == 'in-progress'
-  end
-
-  def pending?
-    status == 'pending'
+  def self.update_status(params, task)
+    unless params[:task][:status] == 1
+      task.status = 2 unless params[:task][:hours] == 0
+    end
   end
 
   def self.search(search)

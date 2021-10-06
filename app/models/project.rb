@@ -4,18 +4,16 @@ class Project < ApplicationRecord
   has_many :assigns
   has_many :users, through: :assigns
 
-  def status
-    if tasks.empty?
-      'pending'
+  enum status: [:pending, :complete, :in_progress]
+
+  def self.check_whole_status(project)
+    result = true
+    project.tasks.each do |t|
+      unless t.status == 1
+        result = false
+      end
     end
-    
-    if tasks.all? { |task| task.complete? }
-      'complete'
-    elsif tasks.any? { |task| task.in_progress? || task.complete? }
-      'in-progress'
-    else
-      'pending'
-    end
+      result
   end
 
   def self.search(search)
