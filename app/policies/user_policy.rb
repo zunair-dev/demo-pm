@@ -25,11 +25,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.admin?
+    true
   end
 
   def destroy?
     @user.admin?
+  end
+
+  def profile?
+    true
   end
 
 end

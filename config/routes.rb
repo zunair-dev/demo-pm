@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     collection do
       get 'admins', to: 'users#admins'
     end
+    member do
+      get 'profile', to: 'users#profile'
+    end
   end
   post 'new_user/', to: 'users#create'
   resources :projects do

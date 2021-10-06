@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy profile ]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
   before_action :authenticate
   def index 
@@ -44,7 +44,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_path, notice: "User was successfully updated." }
+        unless user_params[:password].present?
+          format.html { redirect_to users_path, notice: "User was successfully updated." }
+        else
+          format.html { redirect_to root_path, notice: "Your password is successfully updated - you've to login again." }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -58,10 +62,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def profile
+
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :admin, :name, :designation)
+    params.require(:user).permit(:email, :admin, :name, :designation, :password)
   end
   
   def set_user
