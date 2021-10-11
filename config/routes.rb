@@ -10,13 +10,6 @@ Rails.application.routes.draw do
       get 'completed_projects', to: "employees#completed_projects"
     end
   end
-  # get 'employees/index'
-  # get 'employees/pdf'
-  # get 'employees/complete'
-  # get 'employees/tasks'
-  # get 'employees/projects'
-  # get 'employees/active_projects'
-  # get 'employees/completed_projects'
   devise_for :users
   resources :users, except: [:create] do
     collection do
@@ -24,6 +17,8 @@ Rails.application.routes.draw do
     end
     member do
       get 'profile', to: 'users#profile'
+      get 'projects', to: 'users#projects'
+      get 'tasks', to: 'users#tasks'
     end
   end
   post 'new_user/', to: 'users#create'

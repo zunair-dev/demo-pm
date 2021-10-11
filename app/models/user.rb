@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :assigns
   has_many :projects, through: :assigns
 
-  validates :email, presence: { messages: "Mail shouldn't be empty" }
+  validates :name, :email, presence: true
   validates :email, uniqueness: true
   ROLE_OPTIONS = [
     ['Employee', 0],

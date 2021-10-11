@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   # GET projects/1/tasks
   def index
-    @tasks = @project.tasks
+    @tasks = @project.tasks.order(id: :asc)
     add_breadcrumbs('All Tasks')
   end
 
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
         UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later
         format.html { redirect_to @task.project, notice: "Task was successfully created." }
       else
-        render action: 'new'
+        format.html { render action: 'new', alert: "Task wasn't successfully created." }
       end
     end
   end

@@ -7,11 +7,11 @@
       <%= link_to project, class: "text-decoration-none" do %>
         <div class="card project-card mb-3">
           <div class="card-body">
-            <span class="badge badge-primary mb-3">Time: <%= project.hours %> hours</span> |
-            <span class="badge badge-primary mb-3">Cost: <%= project.cost %> k</span> |
-            <span class="badge badge-primary mb-3">Status: <%= project.status %> </span>
             <h5 class='card-title text-dark'><b><%= project.name %></b></h5>
             <p><%= project.description %></p>
+            <span class="badge badge-primary">Time: <%= project.hours %> hours</span> |
+            <span class="badge badge-primary">Cost: <%= project.cost %> k</span> |
+            <span class="badge badge-primary">Status: <%= project.status %> </span>
           </div>
         </div>
       <% end %>

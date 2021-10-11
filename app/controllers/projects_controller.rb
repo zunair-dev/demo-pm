@@ -6,11 +6,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = current_user.self_projects.search(params[:search]).paginate(page: params[:page], per_page: 4)
+    @projects = current_user.self_projects.order(id: :DESC).search(params[:search]).paginate(page: params[:page], per_page: 4)
   end
 
   def all
-    @projects = Project.search(params[:search]).paginate(page: params[:page], per_page: 4)
+    @projects = Project.order(id: :DESC).search(params[:search]).paginate(page: params[:page], per_page: 4)
     add_breadcrumbs('All Projects')
   end
 
@@ -34,11 +34,11 @@ class ProjectsController < ApplicationController
 
   # POST /projects or /projects.json
   def create
+    Project.assign_projects(params, @project)
     @project = current_user.self_projects.build(project_params)
 
     respond_to do |format|
       if @project.save
-        Assign.create(project_id: @project.id, user_id: User.find(params[:project][:emp]).id) unless params[:project][:emp].blank?
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
-    Assign.create(project_id: @project.id, user_id: User.find(params[:project][:emp]).id) unless params[:project][:emp].blank?
+    Project.assign_projects(params, @project)
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }

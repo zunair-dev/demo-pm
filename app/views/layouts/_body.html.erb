@@ -7,14 +7,18 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <%= render "layouts/dashboard" %>
-        <%= render "shared/flash_messages" %>
+        <div id="flashMessage">
+          <%= render "shared/flash_messages" %>
+        </div>
         <%= yield %>
       </main>
     </div>
   </div>
   <% else %>
     <div class="container">
-      <%= render "shared/flash_messages" %>
+      <div id="flashMessage">
+        <%= render "shared/flash_messages" %>
+      </div>
       <%= yield %>
     </div>
 <% end %>

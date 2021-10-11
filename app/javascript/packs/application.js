@@ -6,6 +6,10 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
+import "chartkick/chart.js"
 import "channels"
 //= require toastr
 //= require jquery
@@ -16,3 +20,8 @@ import 'bootstrap'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener('turbolinks:load', function(event){
+    $("#flashMessage").delay(3000).slideUp(300);
+    $('.js-states').select2()
+});

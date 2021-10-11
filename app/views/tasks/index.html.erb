@@ -21,7 +21,7 @@
     <td><%= link_to 'Assign', assign_project_task_path(project_id: task.project.id, id: task.id) %></td>
     <td><%= link_to 'Show', [task.project, task] %></td>
     <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
-    <td><%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

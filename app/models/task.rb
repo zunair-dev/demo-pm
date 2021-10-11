@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+  validates :name, :hours, :starting_date, :ending_date, presence: true
+  validates :name, uniqueness: true
+
   belongs_to :project
   belongs_to :user, optional: true
 

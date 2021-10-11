@@ -5,12 +5,52 @@
 <% else %>
 <% @projects.each do |t| %>
   <div class="card project-card mb-3">
-    <div class="card-body">
-      <span class="badge badge-primary mb-3"><%= t.status %> </span> |
-      <span class="badge badge-primary mb-3"><%= t.hours %> hour's required </span> |
-      <span class="badge badge-primary mb-3"> <%= t.cost %> cost </span> 
+    <div class="card-body" data-bs-toggle="modal" data-bs-target="#staticBackdrop", value: :t>
       <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
       <p><%= t.description %></p>
+      <span class="badge badge-primary"><%= t.status %> </span> |
+      <span class="badge badge-primary"><%= t.hours %> hour's required </span> |
+      <span class="badge badge-primary"> <%= t.cost %> cost </span>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Assigned Tasks Related to this Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="width:100%">
+          <% if t.tasks.where(user_id: current_user.id).count == 0 %>
+            <div class="card">
+              <center><i>No tasks available here!</i></center>
+            </div>
+          <% else %>
+            <% t.tasks.where(user_id: current_user.id).each do |t| %>
+              <div class="card project-card mb-3">
+                <div class="card-body">
+                  <%= link_to project_task_path(t.project, t), class: "text-decoration-none" do %>
+                    <h5 class='card-title text-dark'><b><%= t.name %></b></h5>
+                    <p><%= t.description %></p>
+                  <% end %>
+                  <span class="badge badge-primary">Status: <%= t.status %> </span> |
+                  <span class="badge badge-primary">Hours required: <%= t.hours %></span> |
+                  <span class="badge badge-primary">Hours worked: <%= t.hours_worked %></span>  |
+                  <span class="badge badge-primary">project: <%= t.project.name %></span> 
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <%= t.name %>
+          <%# </div> %>
+          <%# <%= render "projects_tasks", @tasks: t.tasks.where(user_id: current_user.id) %> %>
+          in process
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

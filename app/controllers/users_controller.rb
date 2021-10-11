@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy profile ]
+  before_action :set_user, only: %i[ show edit update destroy profile projects tasks ]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
   before_action :authenticate
   def index 
-    @user = User.where(admin: false).order(:id)
+    @user = User.where(admin: false).order(id: :asc)
     add_breadcrumbs('All Employees')
     # authorize @user
   end
 
   def admins 
-    @user = User.where(admin: true).order(:id)
+    @user = User.where(admin: true).order(id: :asc)
     add_breadcrumbs('All Admins')
   end
   
@@ -47,7 +47,12 @@ class UsersController < ApplicationController
         unless user_params[:password].present?
           format.html { redirect_to users_path, notice: "User was successfully updated." }
         else
-          format.html { redirect_to root_path, notice: "Your password is successfully updated - you've to login again." }
+          unless user_params[:password] == user_params[:password_confirmation]
+            flash[:alert] = "Both passwords you just entered don't match"
+            format.html { render 'profile', status: :unprocessable_entity }
+          else
+            format.html { redirect_to new_user_session_path, notice: "Your password is successfully updated - you've to login again." }
+          end
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +70,17 @@ class UsersController < ApplicationController
   def profile
   end
 
+  def projects
+    byebug
+    @projects = Project.where(user_id: @user.id).order(id: :asc)
+    add_breadcrumbs('Project Created')
+  end
+
+  def tasks
+    @tasks = @user.tasks.order(id: :asc)
+    add_breadcrumbs('Assigned Tasks')
+  end
+
   private
 
   def user_params
@@ -72,7 +88,7 @@ class UsersController < ApplicationController
   end
   
   def set_user
-  @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def add_index_breadcrumb

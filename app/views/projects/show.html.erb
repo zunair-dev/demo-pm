@@ -8,8 +8,8 @@
         <%# <%= link_to "Create Task", new_project_task_path(@task.project, @task), class: "btn btn-warning" %>
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Edit Project </button>
         <%# <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %> 
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropR"> View Status </button>
-        <%= link_to "Destroy", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropR"> View Summary </button>
+        <%= link_to "Delete", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
       </div>
     </h4>
 
@@ -21,7 +21,7 @@
             <h5 class="modal-title" id="staticBackdropLabel">Editing Project</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="width:100%">
             <%= render "form", project: @project %>
           </div>
           <div class="modal-footer">
@@ -36,7 +36,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">View Status of Tasks by hours</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Track <b><%= @project.name %></b> by hours</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -88,11 +88,15 @@
             <td><b>Employees: </b></td>
             <% if @project.users.any? %>
               <% @project.users.each do |u| %>
-                <td><%= u.name %></td>
+                <td><%= u.name %>,</td>
               <% end %>
             <% else %>
               <td>N/A</td>
             <%end%>
+          </tr>
+          <tr>
+            <td><b>Delivery: </b></td>
+            <td><%= Project.delivery(@project) %></td>
           </tr>
         </table>
       </div>
@@ -141,7 +145,7 @@
             <td><%= task.ending_date %></td>
             <td><%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %></td>
             <td><%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %></td>
-            <td><%= link_to "Destroy", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
+            <td><%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
           </tr>
           <% end %>
         <% end %>
@@ -153,7 +157,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Editing Project</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Create New Task</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

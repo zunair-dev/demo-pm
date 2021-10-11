@@ -1,38 +1,40 @@
 <% if current_user.admin? %>
-  <h2>Adding a new user</h2>
-
-  <%= form_for User.new , :url => {:action => "create"} do |user| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation" class="bg-danger">
-        <% @user.errors.each do |error| %>
-          <%= error.full_message %>
-        <% end %>
-      </div>
-    <% end %>
-    <div class="form-group">
-      <%= user.label :name %><br />
-      <%= user.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= user.label :email %><br />
-      <%= user.email_field :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= user.label :Designation %><br />
-      <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
-    </div>
-
-    <% if current_user.id == 1 %>
+  <h2 class="text-center col-6 text-success">Adding a new User</h2>
+  
+  <div class="col-6">
+    <%= form_for User.new , :url => {:action => "create"} do |user| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation" class="bg-danger">
+          <% @user.errors.each do |error| %>
+            <%= error.full_message %><br>
+          <% end %>
+        </div>
+      <% end %>
       <div class="form-group">
-        <%= user.label :Role %><br />
-        <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
+        <%= user.label :name %><br />
+        <%= user.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= user.label :email %><br />
+        <%= user.email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= user.label :Designation %><br />
+        <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+      </div>
+
+      <% if current_user.id == 1 %>
+        <div class="form-group">
+          <%= user.label :Role %><br />
+          <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
+        </div>
+      <% end %>
+
+      <div class="add">
+        <%= user.submit class:'btn btn-success'%>
       </div>
     <% end %>
-
-    <div class="add">
-      <%= user.submit class:'btn btn-primary'%>
-    </div>
-  <% end %>
+  </div>
 <% else %>
   <p><i>Sorry you're not authorized!</i></p>
 <%end%>

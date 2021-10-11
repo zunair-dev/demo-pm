@@ -1,33 +1,40 @@
 <%= form_with(model: @user) do |user| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="bg-danger">
       <% @user.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+        <%= error.full_message %><br>
       <% end %>
     </div>
   <% end %>
 
-<div class="form-group">
-    <%= user.label :name %>
-    <%= user.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= user.label :email %>
-    <%= user.email_field :email, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= user.label :Designation %><br />
-    <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
-  </div>
-
   <% if current_user.id == 1 %>
     <div class="form-group">
-      <%= user.label :Role %><br />
-      <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
+      <%= user.label :name %>
+      <%= user.text_field :name, required: true, autofocus: true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= user.label :email %>
+      <%= user.email_field :email, required: true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= user.label :Designation %><br />
+      <%= user.select :designation, User::DESIGNATIONS, {:prompt=>true}, class: 'form-control mb-2' %>
+    </div>
+
+    <% if current_user.id == 1 %>
+      <div class="form-group">
+        <%= user.label :Role %><br />
+        <%= user.select :admin, User::ROLE_OPTIONS, {}, class: 'form-control mb-2' %>
+      </div>
+    <% end %>
+
+    <div class="add">
+      <%= user.submit class:'btn btn-success'%>
+    </div>
+  <% else %>
+    <div class="card border-0 mt-4">
+      <span><center><i>You (as an <b>Employee</b>) can only change your password!</i><center></span>
     </div>
   <% end %>
 
-  <div class="add">
-    <%= user.submit class:'btn btn-warning'%>
-  </div>
 <% end %>

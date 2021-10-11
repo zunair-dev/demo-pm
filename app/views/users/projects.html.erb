@@ -1,0 +1,23 @@
+<table style="width:100%;" class="table bg-white">
+  <thead class="table-dark">
+    <th>Name</th>
+    <th>Description</th>
+    <th>Hours</th>
+    <th>Cost</th>
+    <th>Status</th>
+    <th>Starting Date</th>
+    <th>Ending Date</th>
+  </thead>
+
+  <% @projects.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.description %></td>
+      <td><%= user.hours %></td>
+      <td><%= user.cost %></td>
+      <td><%= user.status %></td>
+      <td><%= user.starting_date %></td>
+      <td><%= user.ending_date %></td>
+    </tr>
+  <% end %>
+</table>

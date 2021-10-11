@@ -36,4 +36,12 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def tasks?
+    @user.admin?
+  end
+
+  def projects?
+    @user.admin?
+  end
+
 end

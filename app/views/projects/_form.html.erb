@@ -1,15 +1,15 @@
 <%= form_with(model: project) do |form| %>
   <% if project.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="bg-danger">
       <% project.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+        <%= error.full_message %><br>
       <% end %>
     </div>
   <% end %>
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, required: true, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -19,27 +19,27 @@
 
   <div class="form-group">
     <%= form.label :cost %>
-    <%= form.text_field :cost, class: 'form-control' %>
+    <%= form.text_field :cost, required: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :hours %>
-    <%= form.text_field :hours, class: 'form-control' %>
+    <%= form.text_field :hours, required: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label "Starting Date" %>
-    <%= form.date_field :starting_date, class: 'form-control' %>
+    <%= form.date_field :starting_date, required: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label "Ending Date" %>
-    <%= form.date_field :ending_date, class: 'form-control' %>
+    <%= form.date_field :ending_date, required: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label "Select Employee" %><br />
-    <%= form.collection_select(:emp, User.where(admin: false), :id, :name, {:prompt=>true}, {:class=>'form-control'}) %>
+    <%= form.label "Assign Project to Employees" %><br />
+    <%= form.select :emp, User.where(admin: false).pluck(:name, :id), { selected: Project.all }, class: "form-control js-states", multiple: true, required: false %>
   </div>
   
   <div class="actions">
