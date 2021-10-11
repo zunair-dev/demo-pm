@@ -49,6 +49,7 @@ class TasksController < ApplicationController
   # PUT projects/1/tasks/1
   def update
     Task.update_status(params, @task)       # to update tasks status
+    Task.add_logs(params, @task)
     respond_to do |format|
       if @task.update(task_params)
         # to update projects status

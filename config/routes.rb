@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'logs/index'
   get 'admin/assign'
   resources :employees, only: [:index] do
     collection do

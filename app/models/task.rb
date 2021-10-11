@@ -4,6 +4,7 @@ class Task < ApplicationRecord
 
   belongs_to :project
   belongs_to :user, optional: true
+  has_many :logs, dependent: :destroy
 
   enum status: [:pending, :complete, :in_progress]
 
@@ -19,6 +20,10 @@ class Task < ApplicationRecord
     else
       all
     end
+  end
+
+  def add_logs(params, task)
+
   end
 
   def self.searchTask(search)
