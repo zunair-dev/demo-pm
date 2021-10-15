@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :assigns
   has_many :projects, through: :assigns
+  has_many :logs, through: :tasks
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true

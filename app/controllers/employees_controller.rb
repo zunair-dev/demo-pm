@@ -13,7 +13,7 @@ class EmployeesController < ApplicationController
   end
 
   def complete
-    @tasks = current_user.tasks.where(status: 'complete').paginate(page: params[:page], per_page: 4)
+    @tasks = current_user.tasks.where(status: 'complete').search(params[:search]).paginate(page: params[:page], per_page: 4)
     add_breadcrumbs('Completed Tasks')
     respond_to do |format|
       format.html

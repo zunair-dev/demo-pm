@@ -1,5 +1,5 @@
 <div class="card">
-  <center class="mt-3"><h6><b>View Project</b></h6></center> <hr>
+  <div class="card-header "><center class="mt-3"><h6><b>View Project</b></h6></center></div>
   <div class="card-body">
     <h4 class='card-title d-flex justify-content-between mb-4'>
       <span><b>Name: </b><%= @project.name %></span>
@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Edit Project </button>
         <%# <%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-secondary" %> 
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropR"> View Summary </button>
-        <%= link_to "Delete", @project, method: :delete, class: "btn btn-dark", data: { confirm: "Are you sure?" } %>
+        <%= link_to "Delete", @project, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
       </div>
     </h4>
 
@@ -40,7 +40,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <%= line_chart  [{name:'Hours Worked', data: @project.tasks.group(:hours_worked).count}, {name: 'Hours Required', data: @project.tasks.group(:hours).count}], xtitle: "Hours", ytitle: "Count" %>
+            <%= area_chart @tasks.pluck(:hours, :hours_worked), xtitle: "Hours required", ytitle: "Logged Hours" %><hr>
+            <table>
+              <tr>
+                <td>Estimated Hours: </td>
+                <td><%= @project.hours %></td>
+              </tr>
+              <tr>
+                <td>Logged Hours: </td>
+                <td><%= Project.logged_hours(@project)%></td>
+              </tr>
+            </table>
+            <%# <%= line_chart  [{name:'Hours Worked', data: @project.tasks.group(:hours_worked).count}, {name: 'Hours Required', data: @project.tasks.group(:hours).count}], xtitle: "Hours", ytitle: "No of tasks" %>
+            <%# <%= column_chart  [{name:'Estimated Hours', data: @project.hours}, {name: 'Hours worked', data: Project.logged_hours(@project)}], xtitle: "Hours", ytitle: "No of tasks" %>
+            <%# <%= column_chart @project.tasks.group(:hours).group(:hours_worked).count %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -66,7 +79,7 @@
           </tr>
           <tr>
             <td><b>Tasks created: </b></td>
-            <td><%= @project.tasks.count %></td>
+            <td><%= @tasks.count %></td>
           </tr>
           <tr>
             <td><b>Manager: </b></td>
@@ -87,35 +100,40 @@
           <tr>
             <td><b>Employees: </b></td>
             <% if @project.users.any? %>
-              <% @project.users.each do |u| %>
-                <td><%= u.name %>,</td>
+              <td><% @project.users.each do |u| %>
+                <%= u.name %>,
               <% end %>
             <% else %>
               <td>N/A</td>
-            <%end%>
+            <%end%></td>
           </tr>
           <tr>
             <td><b>Delivery: </b></td>
-            <td><%= Project.delivery(@project) %></td>
+            <td><%= Project.delivery(@tasks) %></td>
           </tr>
         </table>
       </div>
       <div class="col">
-        <%= line_chart @project.tasks.group(:starting_date).count, xtitle: "Starting Date", ytitle: "Count" %>
+        <%= line_chart @tasks.group(:starting_date).count, xtitle: "Starting Date", ytitle: "Number of Tasks" %>
       </div>
     </div>
+    <hr>
 
-     <br> <hr> <br>
-
-    <h5>Tasks related to the project: <b><%= @project.name %></b></h5> <br>
-    <%= render "shared/search", url: project_path(@project) %>
-    <% if @project.tasks.count == 0 %>
+    <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+      <h5 class="text-secondary">Tasks related to the project: <b><%= @project.name %></b></h5>
+      <div class="d-flex justify-content-between mx-2">
+        <%= render "shared/search", url: project_path(@project) %>
+      </div>
+    </div>
+    
+    <% if @tasks.count == 0 %>
       <div class="card-body">
         <center><i>No tasks created yet!</i></center>
       </div>
     <% else %>
-      <table style="width:100%">
-        <tr>
+      <table style="width:100%;" class="table bg-white">
+        <thead class="table-dark">
           <th>Name</th>
           <th>Description</th>
           <th>Status</th>
@@ -124,11 +142,9 @@
           <th>Hours worked</th>
           <th>Starting Date</th>
           <th>Ending Date</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <% @project.tasks.each do |task| %>
+          <th><center>Actions</center></th>
+        </thead>
+        <% @tasks.each do |task| %>
           <% if task.persisted? %>
           <tr>
             <td><%= task.name %></td>
@@ -143,13 +159,15 @@
             <td><%= task.hours_worked %></td>
             <td><%= task.starting_date %></td>
             <td><%= task.ending_date %></td>
-            <td><%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary btn-sm" %></td>
-            <td><%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %></td>
-            <td><%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-dark" %></td>
+            <td><%= link_to "Show", project_task_path(@project, task), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_project_task_path(task.project, task), class: "btn btn-secondary" %>
+            <%= link_to 'Logs', logs_project_task_path(project_id: task.project_id, id: task.id), class: 'btn btn-success' %>
+            <%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
           </tr>
           <% end %>
         <% end %>
       </table>
+      <%= will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "Older", next_label: "Newer", inner_window: 1, outer_window: 0 %>
     <% end %>
 
     <!-- Modal -->

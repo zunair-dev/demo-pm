@@ -1,0 +1,25 @@
+<% if @logs.count == 0 %>
+  <div class="card">
+    <center><i>No Logs available!</i></center>
+  </div>
+<% else %>
+  <table style="width:100%;" class="table bg-white">
+    <thead class="table-dark">
+      <th>Task</th>
+      <th>Employee</th>
+      <th>Date</th>
+      <th>Logged Hours</th>
+    </thead>
+
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= Task.find(log.task_id).name %></td>
+        <td><%= @user.name %></td>
+        <td><%= log.date %></td>
+        <td><%= log.hours %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @logs, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "Older", next_label: "Newer", inner_window: 1, outer_window: 0 %>
+
+<% end %>

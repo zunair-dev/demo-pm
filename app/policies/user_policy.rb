@@ -44,4 +44,8 @@ class UserPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def logs?
+    true
+  end
+  
 end

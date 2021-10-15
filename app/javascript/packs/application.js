@@ -23,5 +23,5 @@ ActiveStorage.start()
 
 document.addEventListener('turbolinks:load', function(event){
     $("#flashMessage").delay(3000).slideUp(300);
-    $('.js-states').select2()
+    $('.js-states').select2();
 });

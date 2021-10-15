@@ -1,28 +1,62 @@
 <div class="card">
+  <div class="card-header "><center class="mt-3"><h6><b>View Task</b></h6></center></div>
   <div class="card-body">
-    <h3>View Task</h3>
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class='d-flex justify-content-between'>
-          <span class="badge badge-primary mb-3">Status: <%= @task.status %></span> | 
-          <span class="badge badge-primary mb-3">Hours required: <%= @task.hours %></span> | 
-          <span class="badge badge-primary mb-3">Hours worked: <%= @task.hours_worked %></span>
-          <% if current_user.admin == true %>
-            <div>
-              <%= link_to "assign", assign_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
-              <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-light btn-sm" %>
-              <%= link_to "Delete", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary btn-sm" %>
-            </div>
-          <% else %>
-            <%= link_to 'add logged in hours', edit_project_task_path(@task.project, @task), class: 'btn btn-secondary' %>
-          <% end %>
+    <h4 class='card-title d-flex justify-content-between mb-4'>
+      <span><b>Name: </b><%= @task.name %></span>
+      <% if current_user.admin == true %>
+        <div>
+          <%= link_to "assign", assign_project_task_path(@task.project, @task), class: "btn btn-primary" %>
+          <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "btn btn-secondary" %>
+          <%= link_to "Delete", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
         </div>
-        <h5 class="card-title mb-2">
-          <h5><strong>Name: <%= @task.name %></strong></h5>
-          <p><strong>Description: </strong><%= @task.description %></p>
-        </h5>
+      <% else %>
+        <%= link_to 'Log Work (hours)', edit_project_task_path(@task.project, @task), class: 'btn btn-info' %>
+      <% end %>
+    </h4>
+
+    <div class="row">
+      <div class="col">
+        <table>
+          <tr>
+            <td><b>Description: </b></td>
+            <td><%= @task.description %></td>
+          </tr>
+          <tr>
+            <td><b>Hours required: </b></td>
+            <td><%= @task.hours %></td>
+          </tr>
+          <tr>
+            <td><b>Hours Worked: </b></td>
+            <td><%= @task.hours_worked %></td>
+          </tr>
+          <tr>
+            <td><b>Project: </b></td>
+            <td><%= @project.name %></td>
+          </tr>
+          <tr>
+            <td><b>Manager: </b></td>
+            <td><%= User.find(@project.user_id).name %></td>
+          </tr>
+          <tr>
+            <td><b>Status: </b></td>
+            <td><%= @task.status %></td>
+          </tr>
+          <tr>
+            <td><b>Starting Date: </b></td>
+            <td><%= @task.starting_date %></td>
+          </tr>
+          <tr>
+            <td><b>Ending Date: </b></td>
+            <td><%= @task.ending_date %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <%= pie_chart @task.logs.group_by_day(:date).count %>
+        <center><i>Hours logged day by day.</i></center>
+        <%# <%= pie_chart @task.logs.group(:hours).count %>
+        <%# <%= line_chart @task.logs.group(:date).group(:hours).count, xtitle: "Starting Date", ytitle: "Count" %>
       </div>
     </div>
-
   </div>
 </div>

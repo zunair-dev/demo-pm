@@ -10,10 +10,12 @@ class Project < ApplicationRecord
   enum status: [:pending, :complete, :in_progress]
 
   def self.check_whole_status(project)
-    result = true
+    result = false
     project.tasks.each do |t|
-      unless t.status == 1
-        result = false
+      unless t.status == "complete "
+        result = true
+      else
+        result == false
       end
     end
       result
@@ -27,18 +29,26 @@ class Project < ApplicationRecord
     end
   end
 
+  def self.logged_hours(project)
+    sum = 0
+    project.tasks.each do |t|
+      sum += t.hours_worked
+    end
+    sum
+  end
+
   private
 
   def self.assign_projects(params, project)
-    users = params[:project][:emp].select do |id|
-      id = id.to_i
-      Assign.create(project_id: project.id, user_id: User.find(id).id) unless id.zero?
+    users = params[:project][:emp].select do |user|
+      user = user.to_i
+      Assign.create(project_id: project.id, user_id: User.find(user).id) unless user.zero?
     end
   end
 
-  def self.delivery(project)
+  def self.delivery(tasks)
     result =  "n/a"
-    project.tasks.each do |t|
+    tasks.each do |t|
       if t.status != "complete" && t.ending_date > Date.today
         result = "Due Delivery"
       elsif t.status == "complete" && t.ending_date >= Date.today

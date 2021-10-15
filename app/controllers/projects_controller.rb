@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1 or /projects/1.json
   def show
     @task = @project.tasks.build
-    @project.tasks = @project.tasks.search(params[:search])
+    @tasks = @project.tasks.order(id: :asc).search(params[:search]).paginate(page: params[:page], per_page: 4)
     add_breadcrumbs(@project.name)
   end
 
@@ -34,11 +34,11 @@ class ProjectsController < ApplicationController
 
   # POST /projects or /projects.json
   def create
-    Project.assign_projects(params, @project)
     @project = current_user.self_projects.build(project_params)
 
     respond_to do |format|
       if @project.save
+        Project.assign_projects(params, @project)
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else

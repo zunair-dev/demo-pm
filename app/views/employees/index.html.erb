@@ -1,8 +1,12 @@
 <div class='card-body'>
-  <div class="d-flex justify-content-between">
-    <h3>Tasks Assigned</h3>
-    <%= link_to 'Download Status Report for Assigned Tasks', employees_path(current_user, format: :pdf), class: 'btn btn-secondary mb-2' %>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> View Your Progress </button>
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h3 class="text-secondary">Tasks Assigned</h3>
+    <div class="d-flex justify-content-between">
+      <%= render "shared/search", url: employees_path %>
+      <%= link_to 'Download Status Report for Assigned Tasks', employees_path(current_user, format: :pdf), class: 'btn btn-info mx-2' %>
+      <button type="button" class="btn btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> View Your Progress </button>
+    </div>
   </div>
 
   <!-- Modal -->
@@ -23,6 +27,5 @@
     </div>
   </div>
 
-  <%= render "shared/search", url: employees_path %>
   <%= render "employees/form" %>
 </div>

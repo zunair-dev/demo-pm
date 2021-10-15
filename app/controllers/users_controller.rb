@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy profile projects tasks ]
+  before_action :set_user, only: %i[ show edit update destroy profile projects tasks logs]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
   before_action :authenticate
   def index 
@@ -68,10 +68,10 @@ class UsersController < ApplicationController
   end
 
   def profile
+    add_breadcrumbs('Edit Your Profile')
   end
 
   def projects
-    byebug
     @projects = Project.where(user_id: @user.id).order(id: :asc)
     add_breadcrumbs('Project Created')
   end
@@ -79,6 +79,11 @@ class UsersController < ApplicationController
   def tasks
     @tasks = @user.tasks.order(id: :asc)
     add_breadcrumbs('Assigned Tasks')
+  end
+
+  def logs
+    @logs = @user.logs.order(id: :asc).paginate(page: params[:page], per_page: 5)
+    add_breadcrumbs('Logs of '+@user.name)
   end
 
   private
@@ -92,7 +97,7 @@ class UsersController < ApplicationController
   end
 
   def add_index_breadcrumb
-    add_breadcrumbs('All Users', users_path)
+    add_breadcrumbs('All Employees', users_path)
   end
 
   def authenticate

@@ -8,6 +8,7 @@
     <th>Status</th>
     <th>Starting Date</th>
     <th>Ending Date</th>
+    <th>View Logs</th>
   </thead>
 
   <% @tasks.each do |task| %>
@@ -19,6 +20,7 @@
       <td><%= task.status %></td>
       <td><%= task.starting_date %></td>
       <td><%= task.ending_date %></td>
+      <td><%= link_to 'Logs', logs_project_task_path(project_id: task.project_id, id: task.id), class: 'btn btn-success' %></td>
     </tr>
   <% end %>
 </table>

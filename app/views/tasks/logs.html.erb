@@ -1,0 +1,29 @@
+<div
+class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2">
+  <h3 class="text-secondary">All Logs of Task <b><%= @task.name %></b></h3>
+</div>
+<% if @logs.count == 0 %>
+  <div class="card">
+    <center><i>No Logs available!</i></center>
+  </div>
+<% else %>
+  <table style="width:100%;" class="table bg-white">
+    <thead class="table-dark">
+      <th>Task</th>
+      <th>Project</th>
+      <th>Employee</th>
+      <th>Date</th>
+      <th>Logged Hours</th>
+    </thead>
+
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= @task.name %></td>
+        <td><%= @project.name %></td>
+        <td><%= @user.name %></td>
+        <td><%= log.date %></td>
+        <td><%= log.hours %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

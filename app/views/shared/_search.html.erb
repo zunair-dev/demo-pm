@@ -1,6 +1,6 @@
 <%= form_tag url, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+  <div class="input-group">
+    <%= text_field_tag :search, params[:search], class:"form-control" %>
+    <%= submit_tag 'search', class:"btn btn-dark p-1" %>
+  </div>
 <% end %>

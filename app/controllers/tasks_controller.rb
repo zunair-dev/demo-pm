@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :logs]
   before_action :add_index_breadcrumb, only: [:show, :edit, :new]
   before_action :authenticate, except: [:show, :edit, :update]
   before_action :verify_user, only: [:show, :edit, :update]
@@ -33,6 +33,7 @@ class TasksController < ApplicationController
     @task = @project.tasks.build(task_params)
     respond_to do |format|
       if @task.save
+        Task.update_project_status(@task)
         UserMailer.with(user: @user, task: @task).send_task_alert.deliver_later
         format.html { redirect_to @task.project, notice: "Task was successfully created." }
       else
@@ -48,21 +49,12 @@ class TasksController < ApplicationController
 
   # PUT projects/1/tasks/1
   def update
-    Task.update_status(params, @task)       # to update tasks status
-    Task.add_logs(params, @task)
+    Task.add_logs(params, @task) if params[:task][:hours_worked].present?
+    Task.update_status(params, @task) if params[:task][:hours_worked].present?      # to update tasks status
     respond_to do |format|
       if @task.update(task_params)
         # to update projects status
-        if @task.status == "complete"
-          if Project.check_whole_status(@task.project)
-            @task.project.status = 1
-          else
-            @task.project.status = 2
-          end
-        else
-          @task.project.status = 0
-        end
-        @task.project.save
+        Task.update_project_status(@task)
 
         if params[:task][:user_id].present?
           @user = User.find(@task.user_id)
@@ -86,6 +78,13 @@ class TasksController < ApplicationController
       format.html { redirect_to @project, alert: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def logs
+    @logs = @task.logs
+    @user = User.find(@task.user_id)
+    add_breadcrumbs('Tasks', tasks_user_path(@user))
+    add_breadcrumbs('Logs by '+@user.name)
   end
 
   private

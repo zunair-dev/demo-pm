@@ -2,57 +2,57 @@
   <% if current_user.admin == true %>   
     <div class="position-sticky pt-3">
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <%= link_to "Dashboard", root_path, class: "#{current_page?(root_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "Dashboard", root_path, class: "#{current_page?(root_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "All Projects", all_projects_path, class: "#{current_page?(all_projects_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "All Projects", all_projects_path, class: "#{current_page?(all_projects_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "New Project", new_project_path, class: "#{current_page?(new_project_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "New Project", new_project_path, class: "#{current_page?(new_project_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "View Employees", users_path, class: "#{current_page?(users_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "View Employees", users_path, class: "#{current_page?(users_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Add New User", new_user_path, class: "#{current_page?(new_user_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "Add New User", new_user_path, class: "#{current_page?(new_user_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
         <% if current_user.id == 1 %>
-          <li class="nav-item">
-          <%= link_to "View Admins", admins_users_path, class: "#{current_page?(admins_users_path) ? 'active' : ''} nav-link" %>
+          <li class="nav-item margin-active-links">
+          <%= link_to "View Admins", admins_users_path, class: "#{current_page?(admins_users_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
           </li>
         <% end %>
-        <li class="nav-item">
-          <%= link_to "Edit Your Profile", profile_user_path(current_user), class: "#{current_page?(profile_user_path(current_user)) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links ">
+          <%= link_to "Edit Your Profile", profile_user_path(current_user), class: "#{current_page?(profile_user_path(current_user)) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
       </ul>
     </div>
   <% else %>
     <div class="position-sticky pt-3">
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <%= link_to "Dashboard", employees_path, class: "#{current_page?(employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "Dashboard", employees_path, class: "#{current_page?(employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Completed Tasks", complete_employees_path, class: "#{current_page?(complete_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "Completed Tasks", complete_employees_path, class: "#{current_page?(complete_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "View All Tasks", tasks_employees_path, class: "#{current_page?(tasks_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "View All Tasks", tasks_employees_path, class: "#{current_page?(tasks_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "View Active Projects", active_projects_employees_path, class: "#{current_page?(active_projects_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "View Active Projects", active_projects_employees_path, class: "#{current_page?(active_projects_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "View Completed Projects", completed_projects_employees_path, class: "#{current_page?(completed_projects_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "View Completed Projects", completed_projects_employees_path, class: "#{current_page?(completed_projects_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "View All Projects", projects_employees_path, class: "#{current_page?(projects_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "View All Projects", projects_employees_path, class: "#{current_page?(projects_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to 'Download General Status Report', pdf_employees_path(current_user, format: :pdf), class: "#{current_page?(pdf_employees_path) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to 'Download General Status Report', pdf_employees_path(current_user, format: :pdf), class: "#{current_page?(pdf_employees_path) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Edit Your Profile", profile_user_path(current_user), class:"#{current_page?(profile_user_path(current_user)) ? 'active' : ''} nav-link" %>
+        <li class="nav-item margin-active-links">
+          <%= link_to "Edit Your Profile", profile_user_path(current_user), class:"#{current_page?(profile_user_path(current_user)) ? 'active bg-light text-success' : ''} nav-link text-secondary" %>
         </li>
       </ul>
     </div>

@@ -19,4 +19,8 @@ class TaskPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def logs?
+    @user.admin?
+  end
+
 end

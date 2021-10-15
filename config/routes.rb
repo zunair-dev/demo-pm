@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get 'profile', to: 'users#profile'
       get 'projects', to: 'users#projects'
       get 'tasks', to: 'users#tasks'
+      get 'logs'
     end
   end
   post 'new_user/', to: 'users#create'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
     resources :tasks do
       member do
         get 'assign'
+        get 'logs'
       end
     end
   end
